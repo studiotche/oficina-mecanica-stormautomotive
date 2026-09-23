@@ -62,11 +62,11 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
           <!-- Botão Hamburger para Mobile -->
           <button 
             class="mobile-toggle" 
-            id="mobile-menu-toggle" 
+            id="hamburgerBtn" 
             type="button"
             aria-label="Abrir menu de navegação" 
             aria-expanded="false" 
-            aria-controls="mobile-drawer"
+            aria-controls="mobileMenu"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -91,7 +91,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
       </div>
 
       <nav class="mobile-drawer-nav">
-        <ul class="mobile-nav-list">
+        <ul class="mobile-nav-list mobile-nav">
           <li><a href="#inicio" class="mobile-nav-link is-active">Início</a></li>
           <li><a href="#servicos" class="mobile-nav-link">Serviços</a></li>
           <li><a href="#sobre" class="mobile-nav-link">Sobre</a></li>
@@ -140,9 +140,9 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
         </div>
 
         <div class="container hero-container">
-          <div class="hero-content" data-reveal>
+          <div class="hero-content">
             <!-- Eyebrow -->
-            <div class="hero-eyebrow">
+            <div class="hero-eyebrow eyebrow">
               <span>OFICINA MECÂNICA PREMIUM</span>
               <span class="eyebrow-separator" aria-hidden="true"></span>
             </div>
@@ -150,11 +150,11 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             <!-- Título Principal de Alto Impacto -->
             <h1 class="hero-title">
               SEU VEÍCULO<br />
-              <span class="text-accent">EM BOAS MÃOS</span>
+              <span class="text-accent highlight">EM BOAS MÃOS</span>
             </h1>
 
             <!-- Subtítulo -->
-            <p class="hero-subtitle">
+            <p class="hero-subtitle hero-tagline">
               Manutenção, tecnologia e confiança para você ir sempre mais longe.
             </p>
 
@@ -297,7 +297,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
       <section class="services-section" id="servicos" aria-label="Nossos Serviços">
         <div class="container">
           <!-- Cabeçalho da Seção -->
-          <div class="services-header" data-reveal>
+          <div class="services-header">
             <div class="services-header-left">
               <div class="services-eyebrow">
                 <span>NOSSOS SERVIÇOS</span>
@@ -324,7 +324,6 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
               target="_blank" 
               rel="noopener noreferrer" 
               class="service-card service-card--tall"
-              data-reveal
             >
               <div class="service-card-media">
                 <img 
@@ -363,8 +362,6 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
                 target="_blank" 
                 rel="noopener noreferrer" 
                 class="service-card service-card--horizontal"
-                data-reveal
-                data-reveal-delay="100"
               >
                 <div class="service-card-media">
                   <img 
@@ -402,8 +399,6 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
                 rel="noopener noreferrer" 
                 class="service-card service-card--horizontal service-card--collapsible"
                 id="service-card-03"
-                data-reveal
-                data-reveal-delay="200"
               >
                 <div class="service-card-media">
                   <img 
@@ -442,8 +437,6 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
               rel="noopener noreferrer" 
               class="service-card service-card--tall service-card--collapsible"
               id="service-card-04"
-              data-reveal
-              data-reveal-delay="300"
             >
               <div class="service-card-media">
                 <img 
@@ -484,7 +477,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
         <div class="container">
           <div class="about-grid">
             <!-- Coluna Esquerda: Fotografia Real da Equipe -->
-            <div class="about-media-col" data-reveal>
+            <div class="about-media-col">
               <div class="about-media-wrapper">
                 <img 
                   src={asset("https://stormautomotive.vercel.app/assets/images/storm/equipe-storm-hq.png")} 
@@ -519,7 +512,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             </div>
 
             <!-- Coluna Direita: Conteúdo Institucional -->
-            <div class="about-content" data-reveal data-reveal-delay="150">
+            <div class="about-content">
               <div class="about-header-row">
                 <div class="about-eyebrow">
                   <span>SOBRE A STORM</span>
@@ -613,7 +606,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
 
         <div class="container method-container">
           <!-- Linha de Cabeçalho: Título + Texto de Apoio -->
-          <div class="method-header-row" data-reveal>
+          <div class="method-header-row">
             <div class="method-header-left">
               <div class="method-eyebrow">
                 <span>MÉTODO STORM</span>
@@ -632,7 +625,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
           <!-- Três Etapas do Método Storm -->
           <div class="method-steps-grid">
             {methodSteps.map((step, index) => (
-              <div class="method-step-card" data-reveal data-reveal-delay={(index + 1) * 100}>
+              <div class="method-step-card">
                 <div class="method-step-number-row">
                   <span class="method-step-num">{step.number}</span>
                   <span class="method-step-dash" aria-hidden="true"></span>
@@ -684,7 +677,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
         <div class="container">
           <div class="structure-layout">
             <!-- Coluna Esquerda: Apresentação e CTA -->
-            <div class="structure-intro" data-reveal>
+            <div class="structure-intro">
               <div class="structure-eyebrow">
                 <span>NOSSA ESTRUTURA</span>
                 <span class="eyebrow-separator" aria-hidden="true"></span>
@@ -714,7 +707,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             </div>
 
             <!-- Coluna Direita: Grade Editorial Fiel ao Mockup -->
-            <div class="structure-gallery" data-reveal data-reveal-delay="150">
+            <div class="structure-gallery">
               <!-- Linha Superior: Panorâmica Larga + Técnico Elevador -->
               <div class="structure-gallery-row structure-gallery-row--top">
                 <div class="structure-item structure-item--panoramic">
@@ -790,14 +783,14 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
            ==================================================================== -->
       <section class="testimonial-section" id="depoimento" aria-label="Depoimento de Cliente">
         <div class="container">
-          <div class="testimonial-header" data-reveal>
+          <div class="testimonial-header">
             <div class="testimonial-eyebrow">
               <span>DEPOIMENTO</span>
               <span class="eyebrow-separator" aria-hidden="true"></span>
             </div>
           </div>
 
-          <div class="testimonial-card" data-reveal data-reveal-delay="100">
+          <div class="testimonial-card">
             <!-- Foto / Avatar Estruturado -->
             <div class="testimonial-media">
               <div class="testimonial-avatar-wrapper">
@@ -847,7 +840,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
         <div class="container">
           <div class="contact-layout">
             <!-- Coluna 1: CTA Direto WhatsApp -->
-            <div class="contact-cta-col" data-reveal>
+            <div class="contact-cta-col">
               <div class="contact-eyebrow">
                 <span>CONTATO</span>
                 <span class="eyebrow-separator" aria-hidden="true"></span>
