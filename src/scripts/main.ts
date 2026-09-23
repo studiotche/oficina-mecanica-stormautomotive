@@ -277,7 +277,7 @@ export function initializeSite(): void {
 
   // Scroll animations with IntersectionObserver (desktop/tablet only >= 761px)
   const isDesktop = window.matchMedia('(min-width: 761px)').matches;
-  if (isDesktop && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (isDesktop && 'IntersectionObserver' in window) {
     const observerOptions: IntersectionObserverInit = {
       root: null,
       rootMargin: '0px',

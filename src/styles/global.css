@@ -545,14 +545,6 @@ section[id] {
   transition-delay: 400ms;
 }
 
-/* Respeito Rigoroso à Preferência de Redução de Movimento */
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
 
 
 
@@ -3430,19 +3422,6 @@ a.contact-info-value:hover {
 
 /* ==================== */
 
-/* ANIMATIONS MAPGLASS REPOSITORY */
-.hero-reveal-word { display: inline-block; opacity: 0; transform: translateY(20px); will-change: transform, opacity; }
-.hero-reveal-ready .hero-reveal-word { animation: heroReveal 0.8s cubic-bezier(0.2, 0, 0, 1) forwards; animation-delay: var(--hero-delay, 0s); }
-@keyframes heroReveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.eyebrow, .hero-actions > *, .hero-caption { opacity: 0; transform: translateY(20px); will-change: transform, opacity; }
-.hero-reveal-ready .eyebrow, .hero-reveal-ready .hero-actions > *, .hero-reveal-ready .hero-caption { animation: heroReveal 0.8s cubic-bezier(0.2, 0, 0, 1) forwards; animation-delay: var(--hero-delay, 0s); }
-
-.fade-in-hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.2, 0, 0, 1), transform 0.8s cubic-bezier(0.2, 0, 0, 1); will-change: opacity, transform; }
-.fade-in-visible { opacity: 1; transform: translateY(0); }
-
-#mobileMenu.open { transform: translateX(0); visibility: visible; }
-body.menu-open { overflow: hidden; }
-#mobile-backdrop.open { opacity: 1; visibility: visible; }
 @font-face {
   font-family: 'Sora';
   font-style: normal;
@@ -3483,6 +3462,7 @@ body.menu-open { overflow: hidden; }
     url("/assets/fonts/sora-65156c5bc203e9f80e71c4a6dfc97f5bc89c4fdb.woff") format("woff"), 
     url("/assets/fonts/sora-03f3cd8c07d7e3f6a389b5a6236bbd099937e47f.ttf") format("truetype");
 }
+
 
 @font-face {
   font-family: 'Manrope';
@@ -3541,6 +3521,7 @@ body.menu-open { overflow: hidden; }
     url("/assets/fonts/manrope-4b714bb01314d17f8dab5af2a9e713158e2b923d.ttf") format("truetype");
 }
 
+
 @font-face {
   font-family: 'Caveat';
   font-style: normal;
@@ -3571,4 +3552,5 @@ body.menu-open { overflow: hidden; }
     url("/assets/fonts/caveat-f79fbb275ea1e7e97e2b1354fe8bd8ab432b722a.woff") format("woff"), 
     url("/assets/fonts/caveat-97abcdffad4b43c5aa385b9d7e91c602ff8610bc.ttf") format("truetype");
 }
+
 
