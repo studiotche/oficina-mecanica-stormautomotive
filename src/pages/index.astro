@@ -1,628 +1,1065 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { site, solutions, projects, trustItems, faqs, testimonials } from "../data/site";
+import { site, services, methodSteps, testimonials } from "../data/site";
 
 const baseUrl = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
-const asset = (path: string) => `${baseUrl}${path.replace(/^\//, "")}`;
+const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${path.replace(/^\//, "")}`;
 ---
 
 <BaseLayout>
-  <a class="skip-link" href="#inicio">Ir para o conteúdo principal</a>
+  <!-- Acessibilidade: Atalho direto para o conteúdo principal -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
-  <!-- Header -->
-  <header class="header site-header">
-    <div class="container header-container">
-      <a href="#inicio" class="logo-link" aria-label="MAP GLASS - Início">
-        <img
-          src={asset(site.assets.logo)}
-          alt="MAP GLASS - Esquadrias de Alumínio & Vidraçaria"
-          class="logo"
-          width="180"
-          height="56"
-          loading="eager"
-          decoding="async"
-        />
-      </a>
+  <div class="site-wrapper">
+    <!-- ====================================================================
+         HEADER FIXO GLOBAL
+         ==================================================================== -->
+    <header class="site-header" id="site-header">
+      <div class="container header-container">
+        <!-- Logotipo Oficial -->
+        <a href="#inicio" class="header-brand" aria-label="Storm Automotive - Ir para o início">
+          <img 
+            src={asset(site.assets.logo)} 
+            alt="Storm Automotive" 
+            class="header-logo" 
+            width="184" 
+            height="40"
+            fetchpriority="high"
+          />
+        </a>
 
-      <nav class="main-nav" aria-label="Navegação principal">
-        <ul class="nav-list">
-          <li><a href="#solucoes" class="nav-link">Soluções</a></li>
-          <li><a href="#projetos" class="nav-link">Projetos</a></li>
-          <li><a href="#sobre" class="nav-link">Sobre</a></li>
-          <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
-          <li><a href="#contato" class="nav-link">Contato</a></li>
+        <!-- Navegação Desktop -->
+        <nav class="site-nav" aria-label="Navegação Principal">
+          <ul class="nav-list">
+            <li><a href="#inicio" class="nav-link is-active">Início</a></li>
+            <li><a href="#servicos" class="nav-link">Serviços</a></li>
+            <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#estrutura" class="nav-link">Nossa Estrutura</a></li>
+            <li><a href="#contato" class="nav-link">Contato</a></li>
+          </ul>
+        </nav>
+
+        <!-- Ações do Header: CTA e Toggle Mobile -->
+        <div class="header-actions">
+          <a 
+            href={site.whatsappUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--header header-cta"
+            data-storm-href="brand.whatsappHref"
+          >
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Agendar atendimento</span>
+          </a>
+
+          <!-- Botão Hamburger para Mobile -->
+          <button 
+            class="mobile-toggle" 
+            id="mobile-menu-toggle" 
+            type="button"
+            aria-label="Abrir menu de navegação" 
+            aria-expanded="false" 
+            aria-controls="mobile-drawer"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Drawer Mobile Acessível -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-label="Menu móvel">
+      <div class="mobile-drawer-header">
+        <img src={asset(site.assets.logo)} alt="Storm Automotive" class="header-logo" width="147" height="32" />
+        <button class="mobile-drawer-close" id="mobile-menu-close" type="button" aria-label="Fechar menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-drawer-nav">
+        <ul class="mobile-nav-list">
+          <li><a href="#inicio" class="mobile-nav-link is-active">Início</a></li>
+          <li><a href="#servicos" class="mobile-nav-link">Serviços</a></li>
+          <li><a href="#sobre" class="mobile-nav-link">Sobre</a></li>
+          <li><a href="#estrutura" class="mobile-nav-link">Nossa Estrutura</a></li>
+          <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
         </ul>
       </nav>
 
-      <a
-        href={site.whatsappUrl}
-        class="btn btn-primary header-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Solicitar orçamento pelo WhatsApp"
-      >
-        <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-        <span>Solicitar orçamento</span>
-      </a>
-
-      <button
-        class="hamburger"
-        id="hamburgerBtn"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobileMenu"
-        aria-label="Abrir menu de navegação"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- Mobile Menu Drawer (Smooth Slide from Right) -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-backdrop" data-close-menu></div>
-    <div class="mobile-menu-panel">
-      <div class="mobile-menu-header">
-        <a href="#inicio" class="logo-link" data-close-menu aria-label="MAP GLASS - Início">
-          <img
-            src={asset(site.assets.logo)}
-            alt="MAP GLASS - Esquadrias de Alumínio & Vidraçaria"
-            class="logo"
-            width="180"
-            height="56"
-          />
-        </a>
-        <button
-          class="menu-close"
-          type="button"
-          data-close-menu
-          aria-label="Fechar menu"
+      <div class="mobile-drawer-footer">
+        <a 
+          href={site.whatsappUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--primary"
+          data-storm-href="brand.whatsappHref"
         >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="mobile-menu-content">
-        <nav class="mobile-nav" aria-label="Navegação móvel">
-          <a href="#solucoes">Soluções</a>
-          <a href="#projetos">Projetos</a>
-          <a href="#sobre">Sobre</a>
-          <a href="#depoimentos">Depoimentos</a>
-          <a href="#contato">Contato</a>
-        </nav>
-        <div class="menu-panel-footer">
-          <a
-            class="btn btn-secondary menu-cta"
-            href={site.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-            <span>Solicitar orçamento</span>
-          </a>
-          <div class="menu-contact-info">
-            <p><svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></svg> Novo Hamburgo / RS</p>
-            <p><svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/></svg> (51) 99540-6595</p>
-          </div>
-        </div>
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Agendar atendimento</span>
+        </a>
       </div>
     </div>
-  </div>
+    <div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
 
-  <main>
-    <!-- Hero Section -->
-    <section id="inicio" class="hero" aria-labelledby="hero-heading">
-      <div class="hero-bg">
-        <picture>
-          <source media="(max-width: 768px)" srcset={asset(site.assets.heroMobile)} />
-          <img
-            src={asset(site.assets.hero)}
-            alt="Fachada moderna de alto padrão com esquadrias em alumínio e grandes painéis em vidro"
-            width="1920"
-            height="1080"
-            loading="eager"
+    <!-- ====================================================================
+         CONTEÚDO PRINCIPAL
+         ==================================================================== -->
+    <main id="main-content" class="site-main" tabindex="-1">
+      <!-- HERO INSTITUCIONAL STORM AUTOMOTIVE -->
+      <section class="hero-section" id="inicio" aria-label="Apresentação Storm Automotive">
+        <!-- Fotografia Real HQ de Fundo com Sobreposição Editorial de Alto Contraste -->
+        <div class="hero-backdrop">
+          <img 
+            src={asset(site.assets.hero)} 
+            alt="Oficina mecânica de alta precisão Storm Automotive com carros premium e infraestrutura de ponta" 
+            class="hero-bg-img"
+            width="1792"
+            height="877"
             fetchpriority="high"
-            decoding="sync"
           />
-        </picture>
-        <div class="hero-overlay" aria-hidden="true"></div>
-      </div>
-      <div class="container hero-container">
-        <div class="hero-content">
-          <span class="eyebrow">ESPELHOS | BOX | ESQUADRIAS &bull; NOVO HAMBURGO / RS</span>
-          <h1 id="hero-heading">
-            Esquadrias de alumínio e vidraçaria em Novo Hamburgo com a <span class="highlight">Map glass</span>
-          </h1>
-          <p class="hero-tagline">
-            Design que valoriza. Qualidade que permanece.
-          </p>
-          <p class="lead">
-            Esquadrias sob medida para transformar seu projeto em um lugar especial.
-          </p>
-          <div class="hero-actions">
-            <a
-              href={site.whatsappUrl}
-              class="btn btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-              <span>Solicitar meu orçamento</span>
-            </a>
-            <a href="#solucoes" class="link-with-arrow">
-              <span>Conheça nossas soluções</span>
-              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-            </a>
-          </div>
-          <div class="hero-caption">
-            <p>Alumínio, vidro e novas possibilidades.</p>
-          </div>
+          <div class="hero-overlay" aria-hidden="true"></div>
         </div>
-      </div>
-    </section>
 
-    <!-- Trust Banner -->
-    <section class="trust-banner" aria-label="Diferenciais da MAP GLASS">
-      <div class="container trust-container">
-        {
-          trustItems.map((item, index) => (
-            <>
-              <div class="trust-item">
-                <i class={item.icon} aria-hidden="true"></i>
-                <div class="trust-text">
-                  <strong>{item.title}</strong>
-                  <p>{item.description}</p>
-                </div>
-              </div>
-              {index < trustItems.length - 1 && <div class="trust-divider" aria-hidden="true"></div>}
-            </>
-          ))
-        }
-      </div>
-    </section>
+        <div class="container hero-container">
+          <div class="hero-content" data-reveal>
+            <!-- Eyebrow -->
+            <div class="hero-eyebrow">
+              <span>OFICINA MECÂNICA PREMIUM</span>
+              <span class="eyebrow-separator" aria-hidden="true"></span>
+            </div>
 
-    <!-- Solutions Section -->
-    <section id="solucoes" class="solutions" aria-labelledby="solutions-heading">
-      <div class="container">
-        <div class="solutions-header">
-          <div class="solutions-title-group">
-            <span class="eyebrow">NOSSAS SOLUÇÕES</span>
-            <h2 id="solutions-heading">
-              Cada detalhe faz parte<br />do seu projeto.
-            </h2>
-          </div>
-          <div class="solutions-desc">
-            <p>
-              Funcionalidade e estética em soluções<br />para diferentes ambientes.
+            <!-- Título Principal de Alto Impacto -->
+            <h1 class="hero-title">
+              SEU VEÍCULO<br />
+              <span class="text-accent">EM BOAS MÃOS</span>
+            </h1>
+
+            <!-- Subtítulo -->
+            <p class="hero-subtitle">
+              Manutenção, tecnologia e confiança para você ir sempre mais longe.
             </p>
-          </div>
-        </div>
 
-        <div class="solutions-grid">
-          {
-            solutions.map((item) => (
-              <article class="solution-card">
-                <div class="solution-image-wrapper">
-                  <img
-                    src={asset(item.image)}
-                    alt={item.alt}
-                    class={`solution-image ${item.imgClass}`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <h3 class="solution-title">{item.title}</h3>
-                <a
-                  href={item.link}
-                  class="solution-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Saiba mais sobre ${item.title} no WhatsApp`}
-                >
-                  <span>Saiba mais</span>
-                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-                </a>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projetos" class="projects" aria-labelledby="projects-heading">
-      <div class="container">
-        <div class="projects-header">
-          <div class="projects-title-group">
-            <span class="eyebrow">INSPIRAÇÃO EM CADA ENTREGA</span>
-            <h2 id="projects-heading">
-              Seu próximo projeto<br />começa com uma boa referência.
-            </h2>
-          </div>
-          <a href="#projetos" class="link-with-arrow projects-link">
-            <span>Ver projetos</span>
-            <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-          </a>
-        </div>
-
-        <div class="projects-grid">
-          {
-            projects.map((project) => (
-              <button
-                class={`project-card ${project.isLarge ? "card-large" : "card-small"}`}
-                type="button"
-                aria-label={`Ampliar imagem ${project.title}`}
-                data-image={asset(project.image)}
-                data-caption={project.title}
+            <!-- Ações Principais (CTAs) -->
+            <div class="hero-actions">
+              <a 
+                href={site.whatsappUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn btn--primary hero-btn hero-btn--primary"
+                data-storm-href="brand.whatsappHref"
               >
-                <img
-                  src={asset(project.image)}
-                  alt={project.alt}
-                  class="project-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="project-caption-overlay">
-                  <span class="project-caption">{project.title}</span>
-                </div>
-              </button>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+                <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Agendar atendimento</span>
+                <svg class="btn-icon btn-arrow-right" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
 
-    <!-- About Section -->
-    <section id="sobre" class="about" aria-labelledby="about-heading">
-      <div class="container about-container">
-        <div class="about-image-wrapper">
-          <img
-            src={asset(site.assets.about)}
-            alt="Equipe de especialistas e fábrica da MAP GLASS em Novo Hamburgo"
-            class="about-image"
-            width="800"
-            height="533"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="about-content">
-          <span class="eyebrow">SOBRE A MAP GLASS</span>
-          <h2 id="about-heading">
-            Precisão no detalhe.<br />Cuidado em cada projeto.
-          </h2>
-          <p>
-            A MAP GLASS une qualidade, acabamento refinado e modernidade em soluções sob medida para esquadrias de alumínio e vidros temperados. Atendemos Novo Hamburgo e toda a região do Vale dos Sinos com pontualidade, atendimento consultivo e fabricação própria.
-          </p>
-          <a
-            href={site.instagramUrl}
-            class="link-with-arrow about-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Conheça a MAP GLASS no Instagram"
-          >
-            <span>Conheça a MAP GLASS</span>
-            <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
+              <a href="#servicos" class="btn btn--outline hero-btn hero-btn--secondary desktop-only">
+                <span>Conheça nossos serviços</span>
+                <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
 
-    <!-- Testimonials Section (Google Reviews - Paridade Nutricionista Nádia) -->
-    <section id="depoimentos" class="testimonials-section" aria-labelledby="testimonials-heading">
-      <div class="container">
-        <div class="testimonial-heading">
-          <div>
-            <span class="eyebrow">AVALIAÇÕES NO GOOGLE</span>
-            <h2 id="testimonials-heading">
-              A confiança de quem<br />já transformou seu espaço.
-            </h2>
-          </div>
-          <div class="testimonial-heading-desc">
-            <p>
-              Relatos reais de clientes sobre o padrão de acabamento, pontualidade e excelência da MAP GLASS.
-            </p>
-            <a
-              class="google-rating"
-              href={site.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Avaliação ${site.googleRating.score} de 5 estrelas no Google Maps`}
-            >
-              <svg class="google-g" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="#4285F4"
-                  d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"
-                ></path>
-                <path
-                  fill="#34A853"
-                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"
-                ></path>
-                <path
-                  fill="#FBBC05"
-                  d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"
-                ></path>
-                <path
-                  fill="#EA4335"
-                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75z"
-                ></path>
-              </svg>
-              <strong>{site.googleRating.score}</strong>
-              <span class="google-stars" aria-hidden="true">
-                {
-                  [0, 1, 2, 3, 4].map(() => (
-                    <svg viewBox="0 0 24 24">
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                  ))
-                }
-              </span>
-              <small>{site.googleRating.reviews} avaliações no Google</small>
-            </a>
-          </div>
-        </div>
-
-        <div class="testimonial-grid">
-          {
-            testimonials.map((item) => (
-              <figure class="testimonial-card">
-                <div class="testimonial-topline">
-                  <svg class="google-mark" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"></path>
-                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"></path>
-                    <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"></path>
-                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75z"></path>
+            <!-- FAIXA DE CONFIANÇA 1 (MICRO-FEATURES SOB OS CTAS) -->
+            <ul class="hero-trust-strip" aria-label="Diferenciais operacionais">
+              <li class="trust-strip-item">
+                <div class="trust-icon-wrapper">
+                  <svg class="trust-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                    <path d="m3.8 14.8 5.4-5.4"></path>
                   </svg>
-                  <span class="testimonial-stars" role="img" aria-label="5 estrelas">
-                    {
-                      [0, 1, 2, 3, 4].map(() => (
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                        </svg>
-                      ))
-                    }
+                </div>
+                <div class="trust-text">
+                  <span class="trust-title">ATENDIMENTO</span>
+                  <span class="trust-sub">ESPECIALIZADO</span>
+                </div>
+              </li>
+
+              <li class="trust-strip-divider" aria-hidden="true"></li>
+
+              <li class="trust-strip-item">
+                <div class="trust-icon-wrapper">
+                  <svg class="trust-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                </div>
+                <div class="trust-text">
+                  <span class="trust-title">TRANSPARÊNCIA</span>
+                  <span class="trust-sub">EM CADA ETAPA</span>
+                </div>
+              </li>
+
+              <li class="trust-strip-divider" aria-hidden="true"></li>
+
+              <li class="trust-strip-item">
+                <div class="trust-icon-wrapper">
+                  <svg class="trust-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div class="trust-text">
+                  <span class="trust-title">EM IJUÍ – RS</span>
+                  <span class="trust-sub">HÁ MAIS DE 14 ANOS</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FAIXA DE CONFIANÇA 2 (BARRA INFERIOR COMPACTA E ESTRUTURADA) -->
+        <aside class="hero-features-bar" aria-label="Pilares de excelência técnica">
+          <div class="container features-bar-container">
+            <div class="feature-item">
+              <div class="feature-icon-wrapper">
+                <svg class="feature-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <span class="feature-title">Veículos<br class="feature-break-mobile" /> Nacionais</span>
+                <span class="feature-subtitle">e Importados</span>
+              </div>
+            </div>
+
+            <div class="features-bar-divider" aria-hidden="true"></div>
+
+            <div class="feature-item">
+              <div class="feature-icon-wrapper">
+                <svg class="feature-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 12 10s-6.7.6-8.5 1.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"></path>
+                  <circle cx="7" cy="17" r="2"></circle>
+                  <path d="M9 17h6"></path>
+                  <circle cx="17" cy="17" r="2"></circle>
+                  <path d="m4.6 11 1.8-4.2C6.8 5.7 7.9 5 9.1 5h5.8c1.2 0 2.3.7 2.7 1.8l1.8 4.2"></path>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <span class="feature-title">Equipamentos</span>
+                <span class="feature-subtitle">de Última<br class="feature-break-mobile" /> Geração</span>
+              </div>
+            </div>
+
+            <div class="features-bar-divider" aria-hidden="true"></div>
+
+            <div class="feature-item">
+              <div class="feature-icon-wrapper">
+                <svg class="feature-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <span class="feature-title">Equipe Técnica</span>
+                <span class="feature-subtitle">Qualificada</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SEÇÃO NOSSOS SERVIÇOS
+           ==================================================================== -->
+      <section class="services-section" id="servicos" aria-label="Nossos Serviços">
+        <div class="container">
+          <!-- Cabeçalho da Seção -->
+          <div class="services-header" data-reveal>
+            <div class="services-header-left">
+              <div class="services-eyebrow">
+                <span>NOSSOS SERVIÇOS</span>
+                <span class="eyebrow-line" aria-hidden="true"></span>
+              </div>
+              <h2 class="services-title">
+                MANUTENÇÃO COMPLETA<br />
+                <span class="text-accent">PARA O SEU VEÍCULO</span>
+              </h2>
+            </div>
+
+            <div class="services-header-right">
+              <p class="services-intro">
+                Aqui seu carro recebe o cuidado que ele merece, com técnica, experiência e equipamentos de ponta.
+              </p>
+            </div>
+          </div>
+
+          <!-- Grade Assimétrica Editorial -->
+          <div class="services-grid">
+            <!-- Card 01 (Alto): Revisão Preventiva -->
+            <a 
+              href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20Revis%C3%A3o%20Preventiva.`} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="service-card service-card--tall"
+              data-reveal
+            >
+              <div class="service-card-media">
+                <img 
+                  src={asset(services[0].image)} 
+                  alt={services[0].alt}
+                  class="service-card-img" 
+                  width="1122" 
+                  height="1402"
+                  loading="lazy"
+                />
+                <div class="service-card-overlay" aria-hidden="true"></div>
+              </div>
+              <div class="service-card-body">
+                <div class="service-number">
+                  <span>01</span>
+                  <span class="service-number-bar" aria-hidden="true"></span>
+                </div>
+                <h3 class="service-title" set:html={services[0].title.replace(/\n/g, '<br/>')}></h3>
+                <p class="service-desc" set:html={services[0].description.replace(/\n/g, '<br/>')}></p>
+              </div>
+              <div class="service-action" aria-hidden="true">
+                <span class="service-circle-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <!-- Coluna Central: Dois Cards Horizontais Empilhados -->
+            <div class="services-column-center">
+              <!-- Card 02 (Horizontal): Diagnóstico Eletrônico -->
+              <a 
+                href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20um%20Diagn%C3%B3stico%20Eletr%C3%B4nico.`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="service-card service-card--horizontal"
+                data-reveal
+                data-reveal-delay="100"
+              >
+                <div class="service-card-media">
+                  <img 
+                    src={asset(services[1].image)} 
+                    alt={services[1].alt}
+                    class="service-card-img" 
+                    width="1672" 
+                    height="941"
+                    loading="lazy"
+                  />
+                  <div class="service-card-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="service-card-body">
+                  <div class="service-number">
+                    <span>02</span>
+                    <span class="service-number-bar" aria-hidden="true"></span>
+                  </div>
+                  <h3 class="service-title" set:html={services[1].title.replace(/\n/g, '<br/>')}></h3>
+                  <p class="service-desc" set:html={services[1].description.replace(/\n/g, '<br/>')}></p>
+                </div>
+                <div class="service-action" aria-hidden="true">
+                  <span class="service-circle-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                   </span>
                 </div>
-                <blockquote>"{item.text}"</blockquote>
-                <figcaption>
-                  <div class="testimonial-author">
-                    <strong>{item.name}</strong>
-                    <span>{item.city}</span>
-                    <a class="testimonial-source" href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer">
-                      Avaliação verificada no Google
-                    </a>
-                  </div>
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+              </a>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="faq-section" aria-labelledby="faq-heading">
-      <div class="container">
-        <div class="faq-grid">
-          <div class="faq-header">
-            <span class="eyebrow">DÚVIDAS FREQUENTES</span>
-            <h2 id="faq-heading">
-              Tudo o que você precisa saber antes de iniciar seu projeto.
-            </h2>
-            <p class="faq-intro">
-              Transparência, suporte técnico e segurança para transformar sua residência ou empresa com excelência.
-            </p>
-            <div class="faq-cta-box">
-              <div class="faq-cta-header">
-                <div class="faq-cta-icon" aria-hidden="true">
-                  <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+              <!-- Card 03 (Horizontal): Manutenção Especializada -->
+              <a 
+                href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7amento%20para%20Manuten%C3%A7%C3%A3o%20Especializada.`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="service-card service-card--horizontal service-card--collapsible"
+                id="service-card-03"
+                data-reveal
+                data-reveal-delay="200"
+              >
+                <div class="service-card-media">
+                  <img 
+                    src={asset(services[2].image)} 
+                    alt={services[2].alt}
+                    class="service-card-img" 
+                    width="1672" 
+                    height="941"
+                    loading="lazy"
+                  />
+                  <div class="service-card-overlay" aria-hidden="true"></div>
                 </div>
-                <div class="faq-cta-text">
-                  <strong>Ficou com alguma dúvida específica?</strong>
-                  <p>Nossa equipe técnica atende você prontamente.</p>
+                <div class="service-card-body">
+                  <div class="service-number">
+                    <span>03</span>
+                    <span class="service-number-bar" aria-hidden="true"></span>
+                  </div>
+                  <h3 class="service-title" set:html={services[2].title.replace(/\n/g, '<br/>')}></h3>
+                  <p class="service-desc" set:html={services[2].description.replace(/\n/g, '<br/>')}></p>
+                </div>
+                <div class="service-action" aria-hidden="true">
+                  <span class="service-circle-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 04 (Alto): Ar-Condicionado -->
+            <a 
+              href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20revisar%20o%20sistema%20de%20Ar-Condicionado.`} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="service-card service-card--tall service-card--collapsible"
+              id="service-card-04"
+              data-reveal
+              data-reveal-delay="300"
+            >
+              <div class="service-card-media">
+                <img 
+                  src={asset(services[3].image)} 
+                  alt={services[3].alt}
+                  class="service-card-img" 
+                  width="1122" 
+                  height="1402" 
+                  loading="lazy"
+                />
+                <div class="service-card-overlay" aria-hidden="true"></div>
+              </div>
+              <div class="service-card-body">
+                <div class="service-number">
+                  <span>04</span>
+                  <span class="service-number-bar" aria-hidden="true"></span>
+                </div>
+                <h3 class="service-title" set:html={services[3].title.replace(/\n/g, '<br/>')}></h3>
+                <p class="service-desc" set:html={services[3].description.replace(/\n/g, '<br/>')}></p>
+              </div>
+              <div class="service-action" aria-hidden="true">
+                <span class="service-circle-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SEÇÃO SOBRE A STORM
+           ==================================================================== -->
+      <section class="about-section" id="sobre" aria-label="Sobre a Storm Automotive">
+        <div class="container">
+          <div class="about-grid">
+            <!-- Coluna Esquerda: Fotografia Real da Equipe -->
+            <div class="about-media-col" data-reveal>
+              <div class="about-media-wrapper">
+                <img 
+                  src={asset("https://stormautomotive.vercel.app/assets/images/storm/equipe-storm-hq.png")} 
+                  alt="Equipe de especialistas e proprietários da Storm Automotive em Ijuí–RS" 
+                  class="about-img" 
+                  width="1122" 
+                  height="1402"
+                  loading="lazy"
+                />
+                <div class="about-badge desktop-only" aria-label="+14 anos de história em Ijuí - RS">
+                  <span class="about-badge-slash" aria-hidden="true">/</span>
+                  <div class="about-badge-content">
+                    <strong class="about-badge-value">+14 ANOS</strong>
+                    <span class="about-badge-label">DE HISTÓRIA EM IJUÍ - RS</span>
+                  </div>
+                </div>
+
+                <!-- CTA sobre a foto no mobile conforme mockup -->
+                <a 
+                  href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20conhecer%20mais%20sobre%20a%20hist%C3%B3ria%20e%20servi%C3%A7os%20da%20Storm%20Automotive.`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="btn btn--primary about-btn about-btn--overlay mobile-only"
+                >
+                  <span>CONHEÇA A NOSSA HISTÓRIA</span>
+                  <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Coluna Direita: Conteúdo Institucional -->
+            <div class="about-content" data-reveal data-reveal-delay="150">
+              <div class="about-header-row">
+                <div class="about-eyebrow">
+                  <span>SOBRE A STORM</span>
+                  <span class="eyebrow-separator" aria-hidden="true"></span>
+                </div>
+                <div class="about-script-tagline" aria-hidden="true">
+                  <span>Mais que mecânica,</span>
+                  <span class="tagline-highlight">confiança em movimento.</span>
                 </div>
               </div>
-              <a
-                href={site.whatsappUrl}
-                class="btn btn-secondary faq-cta-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>Falar com especialista</span>
-                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-              </a>
-            </div>
-          </div>
 
-          <div class="faq-list">
-            {
-              faqs.map((faq, index) => (
-                <details class="faq-item" open={index === 0}>
-                  <summary class="faq-summary">
-                    <span class="faq-question-text">{faq.question}</span>
-                    <span class="faq-toggle" aria-hidden="true" />
-                  </summary>
-                  <div class="faq-answer">
-                    <p>{faq.answer}</p>
+              <h2 class="about-title">
+                <span class="about-title-line1">TRABALHO SÉRIO</span>
+                <span class="about-title-line2 text-accent">QUE GERA CONFIANÇA</span>
+              </h2>
+
+              <p class="about-lead">
+                A Storm Automotive é uma oficina mecânica em Ijuí - RS, reconhecida pelo atendimento próximo, equipe qualificada e compromisso com a qualidade em cada serviço realizado.
+              </p>
+
+              <!-- Diferenciais com Ícones Lineares -->
+              <div class="about-features-grid">
+                <div class="about-feature-item">
+                  <div class="about-feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
                   </div>
-                </details>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </section>
+                  <span class="about-feature-text">ATENDIMENTO<br />HONESTO</span>
+                </div>
 
-    <!-- CTA Section (Contato) -->
-    <section id="contato" class="cta-section" aria-labelledby="cta-heading">
-      <div class="container cta-container">
-        <h2 id="cta-heading" class="cta-title">
-          Vamos dar forma ao seu projeto?
-        </h2>
-        <p class="cta-text">
-          Converse com nossa equipe e solicite seu orçamento.
-        </p>
-        <a
-          href={site.whatsappUrl}
-          class="btn btn-primary cta-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-          <span>Falar no WhatsApp</span>
-          <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-        </a>
-      </div>
-    </section>
+                <div class="about-feature-item">
+                  <div class="about-feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </div>
+                  <span class="about-feature-text">EQUIPE<br />EXPERIENTE</span>
+                </div>
 
-    <!-- Location Section (Google Maps Full Width - Paridade Lavanderia Ivoti) -->
-    <section class="location-section" id="localizacao" aria-label="Localização da MAP GLASS no Google Maps">
-      <iframe
-        src={site.mapsEmbedUrl}
-        loading="lazy"
-        title="Mapa da MAP GLASS no Google Maps"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    </section>
-  </main>
+                <div class="about-feature-item">
+                  <div class="about-feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="12" y1="20" x2="12" y2="10"></line>
+                      <line x1="18" y1="20" x2="18" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="16"></line>
+                    </svg>
+                  </div>
+                  <span class="about-feature-text">FOCO NA SUA<br />SATISFAÇÃO</span>
+                </div>
+              </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Coluna 1: Marca -->
-        <div class="footer-brand">
-          <a href="#inicio" class="footer-logo-link" aria-label="MAP GLASS - Ir para o início">
-            <img
-              src={asset(site.assets.logoWhite)}
-              alt="MAP GLASS - Esquadrias de Alumínio & Vidraçaria"
-              class="footer-logo"
-              loading="lazy"
-              decoding="async"
-              width="180"
-              height="72"
-            />
-          </a>
-          <p class="footer-desc">
-            Esquadrias sob medida e vidraçaria de alto padrão.<br />Qualidade, elegância e modernidade no Vale dos Sinos.
-          </p>
-          <h3 class="footer-title">ACOMPANHE NOSSOS PROJETOS</h3>
-          <div class="footer-social">
-            <div class="social-buttons">
-              <a
-                href={site.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram da MAP GLASS"
-                class="social-btn"
+              <!-- CTA da Seção Sobre (Desktop) -->
+              <a 
+                href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20conhecer%20mais%20sobre%20a%20hist%C3%B3ria%20e%20servi%C3%A7os%20da%20Storm%20Automotive.`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn btn--primary about-btn desktop-only"
               >
-                <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-              </a>
-              <a
-                href={site.facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook da MAP GLASS"
-                class="social-btn"
-              >
-                <svg class="icon" viewBox="0 0 320 512" fill="currentColor" aria-hidden="true"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                <span>CONHEÇA A NOSSA HISTÓRIA</span>
+                <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
               </a>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Coluna 2: Navegação -->
-        <div class="footer-nav">
-          <h3 class="footer-title">NAVEGUE</h3>
-          <ul class="footer-links">
-            <li><a href="#solucoes">Soluções</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#sobre">Sobre a MAP GLASS</a></li>
-            <li><a href="#depoimentos">Depoimentos</a></li>
-            <li><a href="#contato">Contato</a></li>
-            <li><a href="#localizacao">Localização</a></li>
-          </ul>
+      <!-- ====================================================================
+           SEÇÃO MÉTODO STORM
+           ==================================================================== -->
+      <section class="method-section" id="metodo" aria-label="Método de Trabalho Storm Automotive">
+        <!-- Fundo com Fotografia HQ e Sobreposição Editorial Escura -->
+        <div class="method-backdrop" aria-hidden="true">
+          <img 
+            src={asset("https://stormautomotive.vercel.app/assets/images/storm/metodo-storm-background-hq.png")} 
+            alt="" 
+            class="method-bg-img" 
+            width="1672" 
+            height="941" 
+            loading="lazy"
+          />
+          <div class="method-overlay"></div>
         </div>
 
-        <!-- Coluna 3: Contato -->
-        <div class="footer-contact">
-          <h3 class="footer-title">VAMOS CONVERSAR</h3>
-          <a
-            href={site.whatsappUrl}
-            class="footer-whatsapp"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Conversar no WhatsApp ${site.phoneDisplay}`}
-          >
-            <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></svg>
-            <span>{site.phoneDisplay}</span>
-          </a>
-          <p class="footer-contact-desc">Conte sua ideia para nossa equipe.</p>
-          <a
-            href={site.whatsappUrl}
-            class="btn footer-cta-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Solicitar orçamento</span>
-            <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg>
-          </a>
-          <a
-            href={site.googleMapsUrl}
-            class="footer-location"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Ver localização da MAP GLASS no Google Maps"
-          >
-            <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></svg>
-            <div>
-              <span>{site.locationDisplay}</span>
-              <small class="footer-address">{site.address}</small>
+        <div class="container method-container">
+          <!-- Linha de Cabeçalho: Título + Texto de Apoio -->
+          <div class="method-header-row" data-reveal>
+            <div class="method-header-left">
+              <div class="method-eyebrow">
+                <span>MÉTODO STORM</span>
+                <span class="eyebrow-separator" aria-hidden="true"></span>
+              </div>
+              <h2 class="method-title">
+                <span class="method-title-line1">DO DIAGNÓSTICO</span>
+                <span class="method-title-line2 text-accent">À SUA TRANQUILIDADE</span>
+              </h2>
             </div>
-          </a>
+            <p class="method-lead">
+              Um processo claro, eficiente e focado no que realmente importa: a sua segurança e a durabilidade do seu veículo.
+            </p>
+          </div>
+
+          <!-- Três Etapas do Método Storm -->
+          <div class="method-steps-grid">
+            {methodSteps.map((step, index) => (
+              <div class="method-step-card" data-reveal data-reveal-delay={(index + 1) * 100}>
+                <div class="method-step-number-row">
+                  <span class="method-step-num">{step.number}</span>
+                  <span class="method-step-dash" aria-hidden="true"></span>
+                </div>
+                <div class="method-step-main">
+                  <div class="method-step-header">
+                    <div class="method-step-icon" aria-hidden="true">
+                      {step.icon === 'search' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                      )}
+                      {step.icon === 'file-text' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                          <line x1="16" y1="13" x2="8" y2="13"></line>
+                          <line x1="16" y1="17" x2="8" y2="17"></line>
+                          <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                      )}
+                      {step.icon === 'tool' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        </svg>
+                      )}
+                    </div>
+                    <h3 class="method-step-title" set:html={step.title.replace(/\n/g, '<br/>')}></h3>
+                  </div>
+                  <div class="method-step-arrow" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <p class="method-step-desc">{step.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="footer-bottom">
-        <p>&copy; MAP GLASS - Esquadrias de Alumínio & Vidraçaria. Todos os direitos reservados.</p>
-        <div class="footer-bottom-links">
-          <a href="#" class="privacy-link">Política de privacidade</a>
-          <span class="footer-bottom-divider" aria-hidden="true">|</span>
-          <a href="#" class="terms-link">Termos de uso</a>
+      <!-- ====================================================================
+           SEÇÃO NOSSA ESTRUTURA
+           ==================================================================== -->
+      <section class="structure-section" id="estrutura" aria-label="Nossa Estrutura Storm Automotive">
+        <div class="container">
+          <div class="structure-layout">
+            <!-- Coluna Esquerda: Apresentação e CTA -->
+            <div class="structure-intro" data-reveal>
+              <div class="structure-eyebrow">
+                <span>NOSSA ESTRUTURA</span>
+                <span class="eyebrow-separator" aria-hidden="true"></span>
+              </div>
+
+              <h2 class="structure-title">
+                <span class="structure-title-line1">ESTRUTURA QUE</span>
+                <span class="structure-title-line2 text-accent">INSPIRA CONFIANÇA</span>
+              </h2>
+
+              <p class="structure-lead">
+                Contamos com um espaço moderno, equipamentos atuais e uma equipe preparada para oferecer o melhor em manutenção automotiva, com agilidade, precisão e atendimento personalizado.
+              </p>
+
+              <a 
+                href={`${site.whatsappUrl}&text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20visita%20para%20conhecer%20o%20espa%C3%A7o%20da%20Storm%20Automotive.`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="structure-btn"
+              >
+                <span>CONHEÇA NOSSO ESPAÇO</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Coluna Direita: Grade Editorial Fiel ao Mockup -->
+            <div class="structure-gallery" data-reveal data-reveal-delay="150">
+              <!-- Linha Superior: Panorâmica Larga + Técnico Elevador -->
+              <div class="structure-gallery-row structure-gallery-row--top">
+                <div class="structure-item structure-item--panoramic">
+                  <img 
+                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-oficina-panoramica-hq.png")} 
+                    alt="Visão panorâmica da oficina mecânica Storm Automotive com veículos e elevadores" 
+                    class="structure-img" 
+                    width="1672" 
+                    height="941" 
+                    loading="lazy"
+                  />
+                  <div class="structure-item-overlay" aria-hidden="true"></div>
+                </div>
+
+                <div class="structure-item structure-item--elevador">
+                  <img 
+                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-tecnico-elevador-hq.png")} 
+                    alt="Técnico especializado realizando inspeção veicular em elevador" 
+                    class="structure-img" 
+                    width="1672" 
+                    height="941" 
+                    loading="lazy"
+                  />
+                  <div class="structure-item-overlay" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Linha Inferior: Diagnóstico Tablet + Carrinho de Ferramentas + Recepção VIP -->
+              <div class="structure-gallery-row structure-gallery-row--bottom">
+                <div class="structure-item structure-item--diagnostico">
+                  <img 
+                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/servico-diagnostico-eletronico-hq.png")} 
+                    alt="Diagnóstico computadorizado de precisão em tablet automotivo" 
+                    class="structure-img" 
+                    width="1672" 
+                    height="941" 
+                    loading="lazy"
+                  />
+                  <div class="structure-item-overlay" aria-hidden="true"></div>
+                </div>
+
+                <div class="structure-item structure-item--ferramental">
+                  <img 
+                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-ferramental-hq.png")} 
+                    alt="Estações de ferramentas móveis e equipamentos técnicos Storm" 
+                    class="structure-img" 
+                    width="158" 
+                    height="133" 
+                    loading="lazy"
+                  />
+                  <div class="structure-item-overlay" aria-hidden="true"></div>
+                </div>
+
+                <div class="structure-item structure-item--recepcao">
+                  <img 
+                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-recepcao-hq.png")} 
+                    alt="Sala de recepção e espera premium Storm Automotive" 
+                    class="structure-img" 
+                    width="1672" 
+                    height="941" 
+                    loading="lazy"
+                  />
+                  <div class="structure-item-overlay" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </footer>
+      </section>
 
-  <!-- Modal Lightbox -->
-  <dialog id="image-modal" class="image-modal" aria-label="Visualizador de imagem">
-    <button class="modal-close" aria-label="Fechar visualizador" type="button" autofocus>
-      <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
-    </button>
-    <div class="modal-content">
-      <img id="modal-img" src="" alt="Imagem ampliada" />
-      <p id="modal-caption" class="modal-caption"></p>
-    </div>
-  </dialog>
+      <!-- ====================================================================
+           SEÇÃO DEPOIMENTO
+           ==================================================================== -->
+      <section class="testimonial-section" id="depoimento" aria-label="Depoimento de Cliente">
+        <div class="container">
+          <div class="testimonial-header" data-reveal>
+            <div class="testimonial-eyebrow">
+              <span>DEPOIMENTO</span>
+              <span class="eyebrow-separator" aria-hidden="true"></span>
+            </div>
+          </div>
 
-  <!-- Floating WhatsApp Button -->
-  <a
-    href={site.whatsappUrl}
-    class="floating-whatsapp"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Fale com a MAP GLASS pelo WhatsApp"
-  >
-    <img
-      src={asset(site.assets.whatsapp)}
-      alt="WhatsApp MAP GLASS"
-      width="60"
-      height="60"
-      loading="lazy"
-    />
-  </a>
-</BaseLayout>
+          <div class="testimonial-card" data-reveal data-reveal-delay="100">
+            <!-- Foto / Avatar Estruturado -->
+            <div class="testimonial-media">
+              <div class="testimonial-avatar-wrapper">
+                <img 
+                  src={asset("https://stormautomotive.vercel.app/assets/images/storm/cliente-carlos-depoimento.jpg")} 
+                  alt={testimonials[0].name} 
+                  class="testimonial-avatar-img"
+                  width="150"
+                  height="150"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <!-- Conteúdo da Citação -->
+            <div class="testimonial-content">
+              <div class="testimonial-quote-box">
+                <blockquote class="testimonial-quote">
+                  <span class="testimonial-quote-mark">“</span>
+                  {testimonials[0].text}
+                  <span class="testimonial-quote-mark">”</span>
+                </blockquote>
+              </div>
+              <div class="testimonial-meta">
+                <cite class="testimonial-author">{testimonials[0].name}</cite>
+                <span class="testimonial-context">{testimonials[0].city}</span>
+              </div>
+            </div>
+
+            <!-- Destaque Lateral Cursivo (Desktop) -->
+            <div class="testimonial-aside desktop-only">
+              <p class="testimonial-script">
+                Mais que uma oficina,<br />
+                uma equipe em que<br />
+                realmente confiamos.
+              </p>
+              <span class="testimonial-accent-bar" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SEÇÃO CONTATO
+           ==================================================================== -->
+      <section class="contact-section" id="contato" aria-label="Contato e Agendamento">
+        <div class="container">
+          <div class="contact-layout">
+            <!-- Coluna 1: CTA Direto WhatsApp -->
+            <div class="contact-cta-col" data-reveal>
+              <div class="contact-eyebrow">
+                <span>CONTATO</span>
+                <span class="eyebrow-separator" aria-hidden="true"></span>
+              </div>
+
+              <h2 class="contact-title">
+                <span class="contact-title-line1">VAMOS CUIDAR</span>
+                <span class="contact-title-line2 text-accent">DO SEU VEÍCULO?</span>
+              </h2>
+
+              <p class="contact-lead">
+                Agende seu atendimento de forma rápida e fácil pelo WhatsApp. Nossa equipe está pronta para te atender.
+              </p>
+
+              <a 
+                href={site.whatsappUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn--whatsapp"
+                aria-label="Agendar atendimento pelo WhatsApp"
+              >
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+971:                 </svg>
+972:                 <span>AGENDAR PELO WHATSAPP</span>
+973:                 <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+974:                   <line x1="5" y1="12" x2="19" y2="12"></line>
+975:                   <polyline points="12 5 19 12 12 19"></polyline>
+976:                 </svg>
+977:               </a>
+978:             </div>
+979: 
+980:             <!-- Coluna 2: Informações de Localização e Horários -->
+981:             <div class="contact-info-col" data-reveal data-reveal-delay="150">
+982:               <!-- Endereço / Localização -->
+983:               <div class="contact-info-item">
+984:                 <div class="contact-info-icon-circle" aria-hidden="true">
+985:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+986:                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+987:                     <circle cx="12" cy="10" r="3"></circle>
+988:                   </svg>
+989:                 </div>
+990:                 <div class="contact-info-text">
+991:                   <span class="contact-info-label">Localização</span>
+992:                   <span class="contact-info-value">{site.city} – {site.state}</span>
+993:                   <span class="contact-info-sub">{site.address.split(',')[0]}</span>
+994:                   <a href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="contact-map-link mobile-only">Como chegar &rarr;</a>
+995:                 </div>
+996:               </div>
+997: 
+998:               <!-- Telefone Direto -->
+999:               <div class="contact-info-item">
+1000:                 <div class="contact-info-icon-circle" aria-hidden="true">
+1001:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+1002:                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+1003:                   </svg>
+1004:                 </div>
+1005:                 <div class="contact-info-text">
+1006:                   <span class="contact-info-label">Telefone Direto</span>
+1007:                   <a href={`tel:+${site.phoneRaw}`} class="contact-info-value">{site.phoneDisplay}</a>
+1008:                   <span class="contact-info-sub">Atendimento comercial e orçamentos</span>
+1009:                 </div>
+1010:               </div>
+1011: 
+1012:               <!-- Horário de Atendimento -->
+1013:               <div class="contact-info-item">
+1014:                 <div class="contact-info-icon-circle" aria-hidden="true">
+1015:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+1016:                     <circle cx="12" cy="12" r="10"></circle>
+1017:                     <polyline points="12 6 12 12 16 14"></polyline>
+1018:                   </svg>
+1019:                 </div>
+1020:                 <div class="contact-info-text">
+1021:                   <span class="contact-info-label">Horário de Atendimento</span>
+1022:                   <span class="contact-info-value">Segunda a Sexta: 8h às 12h e 13h30 às 18h</span>
+1023:                   <span class="contact-info-sub">Sábado: 8h às 12h</span>
+1024:                 </div>
+1025:               </div>
+1026:             </div>
+1027: 
+1028:             <!-- Coluna 3: Card com Mapa Google Real (Desktop) -->
+1029:             <div class="contact-map-col desktop-only" data-reveal data-reveal-delay="250">
+1030:               <div class="contact-map-card">
+1031:                 <iframe 
+1032:                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.9481966097933!2d-53.92477948730591!3d-28.390632575696802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fc2d6871a24d35%3A0x3183f95ef3207d01!2sStorm%20Automotive!5e0!3m2!1spt-BR!2sbr!4v1789077887473!5m2!1spt-BR!2sbr" 
+1033:                   class="contact-map-iframe"
+1034:                   width="600" 
+1035:                   height="450" 
+1036:                   style="border:0;" 
+1037:                   allowfullscreen={true} 
+1038:                   loading="lazy" 
+1039:                   referrerpolicy="strict-origin-when-cross-origin"
+1040:                   title="Localização da Storm Automotive no Google Maps"
+1041:                 ></iframe>
+1042:               </div>
+1043:             </div>
+1044:           </div>
+1045:         </div>
+1046:       </section>
+1047:     </main>
+1048: 
+1049:     <!-- ====================================================================
+1050:          RODAPÉ GLOBAL
+1051:          ==================================================================== -->
+1052:     <footer class="site-footer" id="site-footer">
+1053:       <div class="container">
+1054:         <div class="footer-grid">
+1055:           <!-- Coluna 1: Logo & Tagline Oficial -->
+1056:           <div class="footer-brand-col">
+1057:             <a href="#inicio" class="footer-logo-link" aria-label="Storm Automotive - Voltar ao início">
+1058:               <img 
+1059:                 src={asset(site.assets.logo)} 
+1060:                 alt="Storm Automotive" 
+1061:                 class="footer-logo" 
+1062:                 width="160" 
+1063:                 height="35"
+1064:                 loading="lazy"
+1065:               />
+1066:             </a>
+1067:             <p class="footer-tagline">
+1068:               Mais que mecânica, confiança em movimento.
+1069:             </p>
+1070:           </div>
+1071: 
+1072:           <!-- Coluna 2: Navegação -->
+1073:           <div class="footer-nav-col">
+1074:             <h3 class="footer-col-title">NAVEGAÇÃO</h3>
+1075:             <ul class="footer-nav-list">
+1076:               <li><a href="#inicio" class="footer-nav-link">Início</a></li>
+1077:               <li><a href="#servicos" class="footer-nav-link">Serviços</a></li>
+1078:               <li><a href="#sobre" class="footer-nav-link">Sobre</a></li>
+1079:               <li><a href="#estrutura" class="footer-nav-link">Nossa Estrutura</a></li>
+1080:               <li><a href="#contato" class="footer-nav-link">Contato</a></li>
+1081:             </ul>
+1082:           </div>
+1083: 
+1084:           <!-- Coluna 3: Contato -->
+1085:           <div class="footer-contact-col">
+1086:             <h3 class="footer-col-title">CONTATO</h3>
+1087:             <ul class="footer-contact-list">
+1088:               <li class="footer-contact-item">
+1089:                 <span class="footer-contact-icon" aria-hidden="true">
+1090:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+1091:                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+1092:                     <circle cx="12" cy="10" r="3"></circle>
+1093:                   </svg>
+1094:                 </span>
+1095:                 <span class="footer-contact-text">{site.locationDisplay}</span>
+1096:               </li>
+1097:               <li class="footer-contact-item">
+1098:                 <span class="footer-contact-icon" aria-hidden="true">
+1099:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+1100:                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+1101:                   </svg>
+1102:                 </span>
+1103:                 <a href={`tel:+${site.phoneRaw}`} class="footer-contact-link">{site.phoneDisplay}</a>
+1104:               </li>
+1105:               <li class="footer-contact-item">
+1106:                 <span class="footer-contact-icon" aria-hidden="true">
+1107:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+1108:                     <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+1109:                     <path d="M22 6l-10 7L2 6"></path>
+1110:                   </svg>
+1111:                 </span>
+1112:                 <a href={`mailto:${site.email}`} class="footer-contact-link">{site.email}</a>
+1113:               </li>
+1114:               <li class="footer-contact-item">
+1115:                 <span class="footer-contact-icon" aria-hidden="true">
+1116:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+1117:                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+1118:                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+1119:                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+1120:                   </svg>
+1121:                 </span>
+1122:                 <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-contact-link">{site.instagramHandle}</a>
+1123:               </li>
+1124:             </ul>
+1125:           </div>
+1126: 
+1127:           <!-- Coluna 4: Redes Sociais -->
+1128:           <div class="footer-social-col">
+1129:             <h3 class="footer-col-title">SIGA A STORM</h3>
+1130:             <div class="footer-social-list">
+1131:               <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Storm Automotive no Instagram">
+1132:                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+1133:                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+1134:                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+1135:                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+1136:                 </svg>
+1137:               </a>
+1138: 
+1139:               <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Storm Automotive no Facebook">
+1140:                 <svg viewBox="0 0 24 24" fill="currentColor">
+1141:                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+1142:                 </svg>
+1143:               </a>
+1144:             </div>
+1145:           </div>
+1146:         </div>
+1147: 
+1148:         <!-- Barra Final -->
+1149:         <div class="footer-bottom-bar">
+1150:           <div class="footer-copyright">
+1151:             <span>&copy; {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
+1152:           </div>
+1153:           <div class="footer-legal-links">
+1154:             <a href="#privacidade" class="footer-legal-link">Política de Privacidade</a>
+1155:             <span class="footer-legal-separator" aria-hidden="true">&bull;</span>
+1156:             <a href="#termos" class="footer-legal-link">Termos de Uso</a>
+1157:           </div>
+1158:         </div>
+1159:       </div>
+1160:     </footer>
+1161:   </div>
+1162: </BaseLayout>
