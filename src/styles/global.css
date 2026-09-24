@@ -634,7 +634,7 @@ section[id] {
   /* Link Ativo com traço laranja Storm sutil */
   .nav-link.is-active {
     color: var(--color-text-primary);
-    font-weight: var(--font-weight-semibold);
+    text-shadow: 0 0 .65px var(--color-text-primary), 0 0 .65px var(--color-text-primary);
   }
 
   .nav-link.is-active::after {
@@ -1864,11 +1864,12 @@ section[id] {
   display: none;
   font-family: 'Caveat', cursive, sans-serif;
   font-weight: 600;
-  font-size: 1.25rem;
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.2;
   color: #7A8490;
   text-align: right;
-  max-width: 170px;
+  max-width: 300px;
+  transform: rotate(-2deg);
 }
 
 .about-script-tagline span {
@@ -1876,18 +1877,19 @@ section[id] {
 }
 
 .about-script-tagline .tagline-highlight {
-  color: #555D66;
+  color: #7A8490;
   position: relative;
   display: inline-block;
+  padding-bottom: 2px;
 }
 
 .about-script-tagline .tagline-highlight::after {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 10%;
+  bottom: 0;
+  left: 5%;
   width: 90%;
-  height: 2px;
+  height: 3px;
   background-color: var(--color-accent);
   border-radius: 2px;
 }
@@ -2807,13 +2809,13 @@ section[id] {
 
 @media (min-width: 992px) {
   .faq-container {
-    flex-direction: row;
-    gap: 80px;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
     align-items: flex-start;
   }
   
   .faq-header {
-    flex: 0 0 380px;
     position: sticky;
     top: 120px;
   }
@@ -3494,6 +3496,14 @@ a.contact-info-value:hover {
 /* =========================================
    TIPOGRAFIA - 5 FORMATOS (Gerado localmente)
    ========================================= */
+
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/caveat-600.woff2') format('woff2');
+}
 
 @font-face {
   font-family: 'Sora';
