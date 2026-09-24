@@ -1069,15 +1069,16 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
           <div class="footer-copyright">
             <span>&copy; {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
           </div>
+          
+          <div class="footer-developer">
+            Desenvolvido por <a href="https://jeankist.com/" target="_blank" rel="noopener noreferrer">Jean Kist</a> &copy; {new Date().getFullYear()}
+          </div>
+
           <div class="footer-legal-links">
             <a href="#privacidade" class="footer-legal-link">Política de Privacidade</a>
             <span class="footer-legal-separator" aria-hidden="true">&bull;</span>
             <a href="#termos" class="footer-legal-link">Termos de Uso</a>
           </div>
-        </div>
-        
-        <div class="footer-developer" style="text-align: center; margin-top: 32px; font-size: 0.8rem; color: #6C757D;">
-          Desenvolvido por <a href="https://jeankist.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); text-decoration: none; font-weight: 600;">Jean Kist</a> &copy; {new Date().getFullYear()}
         </div>
       </div>
     </footer>
