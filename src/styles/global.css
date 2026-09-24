@@ -2820,6 +2820,7 @@ section[id] {
 
   .faq-list {
     flex: 1;
+    min-width: 0;
   }
 }
 

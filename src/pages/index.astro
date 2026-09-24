@@ -871,10 +871,10 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
               <span class="structure-title-line2 text-accent">FREQUENTES</span>
             </h2>
           </div>
-          <div class="faq-accordion">
+          <div class="faq-list">
             {
-              faqs.map((faq) => (
-                <details class="faq-item" name="faq-accordion">
+              faqs.map((faq, index) => (
+                <details class="faq-item" open={index === 0}>
                   <summary class="faq-summary">
                     <span class="faq-question-text">{faq.question}</span>
                     <span class="faq-toggle" aria-hidden="true"></span>
