@@ -57,7 +57,11 @@ const localBusinessSchema = {
     <link rel="icon" type="image/webp" href={asset(site.assets.favicon)} />
     <link rel="apple-touch-icon" href={asset(site.assets.favicon)} />
 
-    <!-- Fontes locais -->
+    <!-- Preload de Fontes Locais Essenciais -->
+    <link rel="preload" href="/assets/fonts/sora-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/manrope-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/caveat-600.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Preload Hero Image (LCP) -->
     <link
       rel="preload"
