@@ -2690,7 +2690,7 @@ section[id] {
   padding: 10px 16px;
   border: 1px solid rgba(10, 12, 14, 0.1);
   border-radius: 6px;
-  background: #F8F9FA;
+  background: #FFFFFF;
   color: var(--color-bg);
   text-decoration: none;
   transition: border-color var(--transition-fast), transform var(--transition-fast);
