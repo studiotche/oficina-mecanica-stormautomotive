@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   /* ==========================================================================
      STORM AUTOMOTIVE - DESIGN TOKENS
      Paleta: Preto Profundo / Grafite, Off-White e Laranja Storm
@@ -292,22 +292,7 @@ button {
   top: var(--space-4);
 }
 
-/* Acessibilidade: Redução de Movimento (prefers-reduced-motion) */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
+/* Acessibilidade: Redução de Movimento (prefers-reduced-motion) Removido a pedido do usuário */
 
 
 
@@ -850,8 +835,8 @@ section[id] {
 
 @media (min-width: 992px) {
   .hero-section {
-    min-height: 760px;
-    height: 760px;
+    min-height: 880px;
+    height: 880px;
     justify-content: space-between;
   }
 }
