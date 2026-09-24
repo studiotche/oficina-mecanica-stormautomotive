@@ -3432,12 +3432,12 @@ a.contact-info-value:hover {
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/assets/fonts/sora-700.eot');
-  src: url('/assets/fonts/sora-700.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/sora-700.woff2') format('woff2'),
-       url('/assets/fonts/sora-700.woff') format('woff'),
-       url('/assets/fonts/sora-700.ttf') format('truetype'),
-       url('/assets/fonts/sora-700.svg#Sora') format('svg');
+  src: url('/oficina-mecanica-stormautomotive/assets/fonts/sora-700.eot');
+  src: url('/oficina-mecanica-stormautomotive/assets/fonts/sora-700.eot?#iefix') format('embedded-opentype'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/sora-700.woff2') format('woff2'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/sora-700.woff') format('woff'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/sora-700.ttf') format('truetype'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/sora-700.svg#Sora') format('svg');
 }
 
 @font-face {
@@ -3445,12 +3445,12 @@ a.contact-info-value:hover {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/assets/fonts/manrope-400.eot');
-  src: url('/assets/fonts/manrope-400.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/manrope-400.woff2') format('woff2'),
-       url('/assets/fonts/manrope-400.woff') format('woff'),
-       url('/assets/fonts/manrope-400.ttf') format('truetype'),
-       url('/assets/fonts/manrope-400.svg#Manrope') format('svg');
+  src: url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-400.eot');
+  src: url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-400.eot?#iefix') format('embedded-opentype'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-400.woff2') format('woff2'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-400.woff') format('woff'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-400.ttf') format('truetype'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-400.svg#Manrope') format('svg');
 }
 
 @font-face {
@@ -3458,10 +3458,10 @@ a.contact-info-value:hover {
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/assets/fonts/manrope-700.eot');
-  src: url('/assets/fonts/manrope-700.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/manrope-700.woff2') format('woff2'),
-       url('/assets/fonts/manrope-700.woff') format('woff'),
-       url('/assets/fonts/manrope-700.ttf') format('truetype'),
-       url('/assets/fonts/manrope-700.svg#Manrope') format('svg');
+  src: url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.eot');
+  src: url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.eot?#iefix') format('embedded-opentype'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.woff2') format('woff2'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.woff') format('woff'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.ttf') format('truetype'),
+       url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.svg#Manrope') format('svg');
 }
