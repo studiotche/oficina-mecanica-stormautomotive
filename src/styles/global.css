@@ -857,39 +857,49 @@ section[id] {
   }
 }
 
-/* Camada da Imagem de Fundo Real */
+/* Camada da Imagem de Fundo Real: no mobile abraça a foto natural no topo
+   para que o overlay do degradê tenha exatamente a caixa da imagem */
 .hero-backdrop {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
   z-index: var(--z-base);
   overflow: hidden;
   pointer-events: none;
 }
 
-/* O <picture> precisa preencher o backdrop: sem isso, height:100% do img
-   não se resolve (pai com altura auto) e a foto não cobre o hero,
-   desalinhando o degradê da imagem */
 .hero-backdrop picture {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
 }
 
 .hero-bg-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 80% 35%; /* Ponto de foco no mobile: veículo e técnico reconhecíveis */
-  transform: scale(1.01);
-  will-change: transform;
+  height: auto;
+  object-fit: contain;
+  object-position: top center;
 }
 
 @media (min-width: 834px) {
+  .hero-backdrop {
+    bottom: 0;
+    height: 100%;
+  }
+
+  .hero-backdrop picture {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+
   .hero-bg-img {
+    height: 100%;
+    object-fit: cover;
     object-position: right center;
+    transform: scale(1.01);
+    will-change: transform;
   }
 }
 
