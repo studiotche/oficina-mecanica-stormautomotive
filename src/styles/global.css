@@ -142,10 +142,10 @@
     rgba(10, 12, 14, 0.12) 100%
   );
   --gradient-hero-mobile: linear-gradient(
-    to bottom,
-    transparent 0%,
+    180deg,
+    rgba(10, 12, 14, 0) 0%,
     rgba(10, 12, 14, 0.20) 40%,
-    rgba(10, 12, 14, 0.90) 80%,
+    rgba(10, 12, 14, 0.95) 80%,
     rgba(10, 12, 14, 1) 100%
   );
   --gradient-card-overlay: linear-gradient(
@@ -1120,15 +1120,18 @@ section[id] {
   position: relative;
   z-index: var(--z-elevated);
   width: 100%;
-  background-color: var(--color-surface-base);
-  border-top: 1px solid var(--color-border-subtle);
-  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: transparent;
+  border-top: none;
+  border-bottom: none;
   padding-block: 18px;
 }
 
 @media (min-width: 768px) {
   .hero-features-bar {
     padding-block: 14px;
+    background-color: var(--color-surface-base);
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
   }
 }
 
