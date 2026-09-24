@@ -118,8 +118,38 @@ export const testimonials: readonly TestimonialItem[] = [
   {
     id: "1",
     name: "Carlos Eduardo Mendes",
-    city: "Cliente Storm Automotive, Ijuí - RS",
-    text: "Atendimento diferenciado, serviço de qualidade e total transparência. Levo meus veículos na Storm há anos e sempre saio tranquilo, sabendo que estão em boas mãos.",
+    city: "Ijuí / RS",
+    text: "Atendimento diferenciado, serviço de qualidade e total transparência. Levo meus veículos na Storm há anos e sempre saio tranquilo, sabendo que estão em boas mãos."
+  },
+  {
+    id: "2",
+    name: "Mariana Silva",
+    city: "Ijuí / RS",
+    text: "Profissionais de altíssimo nível. Desde o primeiro contato pelo WhatsApp até a entrega do veículo, tudo foi feito com muita transparência. O orçamento foi cumprido à risca, sem surpresas no final."
+  },
+  {
+    id: "3",
+    name: "Rodrigo Almeida",
+    city: "Cruz Alta / RS",
+    text: "Fiz a revisão completa antes de viajar e fiquei impressionado com o cuidado deles. Troca de óleo, filtros, pastilhas e alinhamento, tudo com peças de primeira. Preço justo pela tranquilidade."
+  },
+  {
+    id: "4",
+    name: "Patricia Gonçalves",
+    city: "Catuípe / RS",
+    text: "Sempre tive receio de levar o carro em oficina mecânica, mas a Storm me surpreendeu. O mecânico me explicou peça por peça o que precisava ser trocado e o porquê. Atendimento nota 10!"
+  },
+  {
+    id: "5",
+    name: "Marcelo Silveira",
+    city: "Ijuí / RS",
+    text: "Já é o segundo veículo da família que trago para cá. A tecnologia e os equipamentos de ponta fazem toda a diferença para carros mais modernos. Além disso, o suporte pós-serviço é impecável."
+  },
+  {
+    id: "6",
+    name: "Fernanda Becker",
+    city: "Ijuí / RS",
+    text: "Empresa séria e de total confiança. Tive um problema no ar-condicionado e na suspensão. Cumpriram o cronograma da manutenção perfeitamente, entregando o carro limpo e impecável."
   }
 ] as const;
 

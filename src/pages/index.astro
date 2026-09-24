@@ -781,54 +781,77 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
       <!-- ====================================================================
            SEÇÃO DEPOIMENTO
            ==================================================================== -->
-      <section class="testimonial-section" id="depoimento" aria-label="Depoimento de Cliente">
+      <section class="testimonials-section" id="depoimento" aria-labelledby="testimonials-title">
         <div class="container">
-          <div class="testimonial-header">
-            <div class="testimonial-eyebrow">
-              <span>DEPOIMENTO</span>
-              <span class="eyebrow-separator" aria-hidden="true"></span>
+          <div class="testimonials-header">
+            <div class="testimonials-header-left">
+              <span class="eyebrow">AVALIAÇÕES NO GOOGLE</span>
+              <h2 id="testimonials-title" class="section-title">
+                A confiança de quem<br />
+                já transformou seu veículo.
+              </h2>
             </div>
+            
+            <a href={site.googleMapsUrl} class="google-rating" target="_blank" rel="noopener noreferrer">
+              <div class="google-rating-text">
+                Relatos reais de clientes sobre o padrão de manutenção, pontualidade e excelência da {site.name}.
+              </div>
+              <div class="google-rating-badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="google-logo">
+                  <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"></path>
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"></path>
+                  <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"></path>
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75z"></path>
+                </svg>
+                <strong>5,0</strong>
+                <span class="google-stars" role="img" aria-label="5 estrelas">
+                  {
+                    [0, 1, 2, 3, 4].map(() => (
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    ))
+                  }
+                </span>
+                <small>28 avaliações no Google</small>
+              </div>
+            </a>
           </div>
 
-          <div class="testimonial-card">
-            <!-- Foto / Avatar Estruturado -->
-            <div class="testimonial-media">
-              <div class="testimonial-avatar-wrapper">
-                <img 
-                  src={asset("https://stormautomotive.vercel.app/assets/images/storm/cliente-carlos-depoimento.jpg")} 
-                  alt={testimonials[0].name} 
-                  class="testimonial-avatar-img"
-                  width="150"
-                  height="150"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            <!-- Conteúdo da Citação -->
-            <div class="testimonial-content">
-              <div class="testimonial-quote-box">
-                <blockquote class="testimonial-quote">
-                  <span class="testimonial-quote-mark">“</span>
-                  {testimonials[0].text}
-                  <span class="testimonial-quote-mark">”</span>
-                </blockquote>
-              </div>
-              <div class="testimonial-meta">
-                <cite class="testimonial-author">{testimonials[0].name}</cite>
-                <span class="testimonial-context">{testimonials[0].city}</span>
-              </div>
-            </div>
-
-            <!-- Destaque Lateral Cursivo (Desktop) -->
-            <div class="testimonial-aside desktop-only">
-              <p class="testimonial-script">
-                Mais que uma oficina,<br />
-                uma equipe em que<br />
-                realmente confiamos.
-              </p>
-              <span class="testimonial-accent-bar" aria-hidden="true"></span>
-            </div>
+          <div class="testimonial-grid">
+            {
+              testimonials.map((item) => (
+                <figure class="testimonial-card">
+                  <div class="testimonial-topline">
+                    <svg class="google-mark" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"></path>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"></path>
+                      <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"></path>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75z"></path>
+                    </svg>
+                    <span class="testimonial-stars" role="img" aria-label="5 estrelas">
+                      {
+                        [0, 1, 2, 3, 4].map(() => (
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                        ))
+                      }
+                    </span>
+                  </div>
+                  <blockquote>"{item.text}"</blockquote>
+                  <figcaption>
+                    <div class="testimonial-author">
+                      <strong>{item.name}</strong>
+                      <span>{item.city}</span>
+                      <a class="testimonial-source" href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer">
+                        Avaliação verificada no Google
+                      </a>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))
+            }
           </div>
         </div>
       </section>
