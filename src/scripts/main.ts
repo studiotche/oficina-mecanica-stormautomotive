@@ -299,6 +299,34 @@ export function initializeSite(): void {
       observer.observe(el);
     });
   }
+
+  // ScrollSpy for Navigation Links
+  const scrollSpySections = document.querySelectorAll<HTMLElement>('section[id]');
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link, .mobile-nav-link');
+
+  if (scrollSpySections.length > 0 && navLinks.length > 0) {
+    const scrollSpyOptions = {
+      root: null,
+      rootMargin: '-40% 0px -60% 0px', // Ativa quando a seção cruza a linha de 40% do topo
+      threshold: 0
+    };
+
+    const scrollSpyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('is-active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('is-active');
+            }
+          });
+        }
+      });
+    }, scrollSpyOptions);
+
+    scrollSpySections.forEach(section => scrollSpyObserver.observe(section));
+  }
 }
 
 if (typeof document !== 'undefined') {
