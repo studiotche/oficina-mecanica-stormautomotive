@@ -2782,6 +2782,128 @@ section[id] {
 /* ==================== */
 
 /* ==========================================================================
+   SEÇÃO FAQ
+   ========================================================================== */
+.faq-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-bg);
+  padding-top: clamp(64px, 8vw, 112px);
+  padding-bottom: clamp(64px, 8vw, 112px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+@media (min-width: 992px) {
+  .faq-container {
+    flex-direction: row;
+    gap: 80px;
+    align-items: flex-start;
+  }
+  
+  .faq-header {
+    flex: 0 0 380px;
+    position: sticky;
+    top: 120px;
+  }
+
+  .faq-accordion {
+    flex: 1;
+  }
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  cursor: pointer;
+  list-style: none; /* Hide default triangle */
+}
+
+/* Hide default marker for webkit/blink */
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-text);
+  padding-right: 20px;
+  transition: color var(--transition-fast);
+}
+
+.faq-item:hover .faq-question {
+  color: var(--color-accent);
+}
+
+.faq-icon {
+  flex: none;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.faq-item:hover .faq-icon {
+  color: var(--color-accent);
+}
+
+.faq-icon .icon-minus {
+  display: none;
+}
+
+details[open] .faq-icon .icon-plus {
+  display: none;
+}
+
+details[open] .faq-icon .icon-minus {
+  display: block;
+}
+
+details[open] .faq-question {
+  color: var(--color-accent);
+}
+
+.faq-answer {
+  padding-bottom: 24px;
+  animation: faq-fade-in 0.3s ease-out forwards;
+}
+
+.faq-answer p {
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 90%;
+  margin: 0;
+}
+
+@keyframes faq-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
    SEÇÃO CONTATO
    Grande seção final em grafite/preto, conversão direta via WhatsApp,
    informações comerciais e representação visual de mapa

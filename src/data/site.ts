@@ -153,4 +153,36 @@ export const testimonials: readonly TestimonialItem[] = [
   }
 ] as const;
 
-export const faqs = [];
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export const faqs: readonly FaqItem[] = [
+  {
+    id: "faq-1",
+    question: "A Storm Automotive atende veículos de todas as marcas?",
+    answer: "Sim! Trabalhamos com veículos nacionais e importados, oferecendo peças de primeira linha e mão de obra qualificada para diferentes padrões automotivos."
+  },
+  {
+    id: "faq-2",
+    question: "Como funciona a garantia dos serviços prestados?",
+    answer: "Oferecemos garantia completa tanto para as peças aplicadas (conforme o fabricante) quanto para o serviço executado, garantindo a sua total tranquilidade."
+  },
+  {
+    id: "faq-3",
+    question: "Posso acompanhar o diagnóstico do meu carro?",
+    answer: "Com certeza. Prezamos pela transparência. Apresentamos o diagnóstico detalhado e explicamos cada etapa da manutenção, para que você saiba exatamente o que está sendo feito."
+  },
+  {
+    id: "faq-4",
+    question: "Vocês realizam orçamentos sem compromisso?",
+    answer: "Sim. Realizamos uma avaliação técnica precisa e elaboramos o orçamento. O serviço só tem início após a sua aprovação."
+  },
+  {
+    id: "faq-5",
+    question: "Quais são as formas de pagamento aceitas?",
+    answer: "Aceitamos cartões de crédito e débito, PIX e oferecemos opções de parcelamento facilitado para manutenções mais completas. Consulte nossa equipe para mais detalhes."
+  }
+] as const;

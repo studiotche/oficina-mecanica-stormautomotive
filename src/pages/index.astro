@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { site, services, methodSteps, testimonials } from "../data/site";
+import { site, services, methodSteps, testimonials, faqs } from "../data/site";
 
 const baseUrl = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -850,6 +850,47 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
                     </div>
                   </figcaption>
                 </figure>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SEÇÃO FAQ
+           ==================================================================== -->
+      <section class="faq-section" id="faq" aria-label="Perguntas Frequentes">
+        <div class="container faq-container">
+          <div class="faq-header">
+            <div class="structure-eyebrow">
+              <span>FAQ</span>
+              <span class="eyebrow-separator" aria-hidden="true"></span>
+            </div>
+            <h2 class="structure-title">
+              <span class="structure-title-line1">PERGUNTAS</span>
+              <span class="structure-title-line2 text-accent">FREQUENTES</span>
+            </h2>
+          </div>
+          <div class="faq-accordion">
+            {
+              faqs.map((faq) => (
+                <details class="faq-item" name="faq-accordion">
+                  <summary class="faq-summary">
+                    <span class="faq-question">{faq.question}</span>
+                    <span class="faq-icon" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-plus">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-minus">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="faq-answer">
+                    <p>{faq.answer}</p>
+                  </div>
+                </details>
               ))
             }
           </div>
