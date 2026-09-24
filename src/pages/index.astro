@@ -784,18 +784,18 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
       <section class="testimonials-section" id="depoimento" aria-labelledby="testimonials-title">
         <div class="container">
           <div class="testimonials-header">
-            <div class="testimonials-header-left">
-              <span class="eyebrow">AVALIAÇÕES NO GOOGLE</span>
-              <h2 id="testimonials-title" class="section-title">
-                A confiança de quem<br />
-                já transformou seu veículo.
+            <div class="structure-intro" style="flex: 1;">
+              <div class="structure-eyebrow">
+                <span>AVALIAÇÕES NO GOOGLE</span>
+                <span class="eyebrow-separator" aria-hidden="true" style="background-color: var(--color-accent);"></span>
+              </div>
+              <h2 class="structure-title" style="margin-bottom: 0;">
+                <span class="structure-title-line1" style="color: var(--color-bg);">A CONFIANÇA DE QUEM</span><br />
+                <span class="structure-title-line2 text-accent">JÁ TRANSFORMOU SEU VEÍCULO</span>
               </h2>
             </div>
             
             <a href={site.googleMapsUrl} class="google-rating" target="_blank" rel="noopener noreferrer">
-              <div class="google-rating-text">
-                Relatos reais de clientes sobre o padrão de manutenção, pontualidade e excelência da {site.name}.
-              </div>
               <div class="google-rating-badge">
                 <svg viewBox="0 0 24 24" aria-hidden="true" class="google-logo">
                   <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"></path>

@@ -2562,7 +2562,7 @@ section[id] {
 @media (min-width: 992px) {
   .structure-section {
     padding-top: clamp(56px, 7vw, 96px);
-    padding-bottom: clamp(40px, 5vw, 56px);
+    padding-bottom: clamp(56px, 7vw, 96px);
   }
 
   .structure-layout {
@@ -2663,7 +2663,7 @@ section[id] {
 .testimonials-section {
   position: relative;
   width: 100%;
-  background-color: var(--color-bg);
+  background-color: #FFFFFF;
   padding-top: clamp(64px, 8vw, 112px);
   padding-bottom: clamp(64px, 8vw, 112px);
 }
@@ -2688,10 +2688,10 @@ section[id] {
   align-items: center;
   gap: 10px;
   padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(10, 12, 14, 0.1);
   border-radius: 6px;
-  background: var(--color-bg-alt);
-  color: var(--color-text);
+  background: #F8F9FA;
+  color: var(--color-bg);
   text-decoration: none;
   transition: border-color var(--transition-fast), transform var(--transition-fast);
 }
@@ -2701,30 +2701,21 @@ section[id] {
   transform: translateY(-2px);
 }
 
-.google-rating-text {
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 320px;
-}
-
 .google-rating-badge {
   display: flex;
   align-items: center;
   gap: 10px;
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  padding-left: 12px;
 }
 
 .google-rating strong {
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-bg);
 }
 
 .google-stars { display: inline-flex; gap: 2px; }
 .google-stars svg { width: 15px; height: 15px; fill: #FBBC05; }
-.google-rating small { color: var(--color-text-muted); font-size: 0.85rem; font-weight: 500; }
+.google-rating small { color: #4A5568; font-size: 0.85rem; font-weight: 500; }
 .google-logo { width: 20px; height: 20px; flex: none; }
 
 .testimonial-grid {
@@ -2739,8 +2730,8 @@ section[id] {
   flex-direction: column;
   margin: 0;
   padding: 28px 28px 24px;
-  background: var(--color-bg-alt);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #F8F9FA;
+  border: 1px solid rgba(10, 12, 14, 0.08);
   border-radius: 8px;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -2757,7 +2748,7 @@ section[id] {
 
 .testimonial-card blockquote {
   margin: 0 0 24px;
-  color: var(--color-text);
+  color: var(--color-bg);
   font-size: 0.975rem;
   line-height: 1.6;
   flex-grow: 1;
@@ -2768,19 +2759,18 @@ section[id] {
   align-items: center;
   gap: 12px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(10, 12, 14, 0.08);
 }
 
 .testimonial-author { display: flex; flex-direction: column; gap: 2px; }
-.testimonial-author strong { font-size: 0.95rem; font-weight: 600; color: var(--color-text); }
-.testimonial-author span { color: var(--color-text-muted); font-size: 0.8rem; }
+.testimonial-author strong { font-size: 0.95rem; font-weight: 600; color: var(--color-bg); }
+.testimonial-author span { color: #4A5568; font-size: 0.8rem; }
 .testimonial-author .testimonial-source { color: var(--color-accent); font-weight: 400; font-size: 0.78rem; text-decoration: none; }
 
 @media (max-width: 991px) {
   .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-header { flex-direction: column; align-items: flex-start; }
   .google-rating { flex-direction: column; align-items: flex-start; }
-  .google-rating-badge { border-left: none; padding-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px; margin-top: 12px; }
 }
 
 @media (max-width: 767px) {
