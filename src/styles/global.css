@@ -868,6 +868,16 @@ section[id] {
   pointer-events: none;
 }
 
+/* O <picture> precisa preencher o backdrop: sem isso, height:100% do img
+   não se resolve (pai com altura auto) e a foto não cobre o hero,
+   desalinhando o degradê da imagem */
+.hero-backdrop picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .hero-bg-img {
   width: 100%;
   height: 100%;
