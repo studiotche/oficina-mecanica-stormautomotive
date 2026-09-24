@@ -864,195 +864,195 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
               >
                 <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-971:                 </svg>
-972:                 <span>AGENDAR PELO WHATSAPP</span>
-973:                 <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-974:                   <line x1="5" y1="12" x2="19" y2="12"></line>
-975:                   <polyline points="12 5 19 12 12 19"></polyline>
-976:                 </svg>
-977:               </a>
-978:             </div>
-979: 
-980:             <!-- Coluna 2: Informações de Localização e Horários -->
-981:             <div class="contact-info-col" data-reveal data-reveal-delay="150">
-982:               <!-- Endereço / Localização -->
-983:               <div class="contact-info-item">
-984:                 <div class="contact-info-icon-circle" aria-hidden="true">
-985:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-986:                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-987:                     <circle cx="12" cy="10" r="3"></circle>
-988:                   </svg>
-989:                 </div>
-990:                 <div class="contact-info-text">
-991:                   <span class="contact-info-label">Localização</span>
-992:                   <span class="contact-info-value">{site.city} – {site.state}</span>
-993:                   <span class="contact-info-sub">{site.address.split(',')[0]}</span>
-994:                   <a href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="contact-map-link mobile-only">Como chegar &rarr;</a>
-995:                 </div>
-996:               </div>
-997: 
-998:               <!-- Telefone Direto -->
-999:               <div class="contact-info-item">
-1000:                 <div class="contact-info-icon-circle" aria-hidden="true">
-1001:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-1002:                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-1003:                   </svg>
-1004:                 </div>
-1005:                 <div class="contact-info-text">
-1006:                   <span class="contact-info-label">Telefone Direto</span>
-1007:                   <a href={`tel:+${site.phoneRaw}`} class="contact-info-value">{site.phoneDisplay}</a>
-1008:                   <span class="contact-info-sub">Atendimento comercial e orçamentos</span>
-1009:                 </div>
-1010:               </div>
-1011: 
-1012:               <!-- Horário de Atendimento -->
-1013:               <div class="contact-info-item">
-1014:                 <div class="contact-info-icon-circle" aria-hidden="true">
-1015:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-1016:                     <circle cx="12" cy="12" r="10"></circle>
-1017:                     <polyline points="12 6 12 12 16 14"></polyline>
-1018:                   </svg>
-1019:                 </div>
-1020:                 <div class="contact-info-text">
-1021:                   <span class="contact-info-label">Horário de Atendimento</span>
-1022:                   <span class="contact-info-value">Segunda a Sexta: 8h às 12h e 13h30 às 18h</span>
-1023:                   <span class="contact-info-sub">Sábado: 8h às 12h</span>
-1024:                 </div>
-1025:               </div>
-1026:             </div>
-1027: 
-1028:             <!-- Coluna 3: Card com Mapa Google Real (Desktop) -->
-1029:             <div class="contact-map-col desktop-only" data-reveal data-reveal-delay="250">
-1030:               <div class="contact-map-card">
-1031:                 <iframe 
-1032:                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.9481966097933!2d-53.92477948730591!3d-28.390632575696802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fc2d6871a24d35%3A0x3183f95ef3207d01!2sStorm%20Automotive!5e0!3m2!1spt-BR!2sbr!4v1789077887473!5m2!1spt-BR!2sbr" 
-1033:                   class="contact-map-iframe"
-1034:                   width="600" 
-1035:                   height="450" 
-1036:                   style="border:0;" 
-1037:                   allowfullscreen={true} 
-1038:                   loading="lazy" 
-1039:                   referrerpolicy="strict-origin-when-cross-origin"
-1040:                   title="Localização da Storm Automotive no Google Maps"
-1041:                 ></iframe>
-1042:               </div>
-1043:             </div>
-1044:           </div>
-1045:         </div>
-1046:       </section>
-1047:     </main>
-1048: 
-1049:     <!-- ====================================================================
-1050:          RODAPÉ GLOBAL
-1051:          ==================================================================== -->
-1052:     <footer class="site-footer" id="site-footer">
-1053:       <div class="container">
-1054:         <div class="footer-grid">
-1055:           <!-- Coluna 1: Logo & Tagline Oficial -->
-1056:           <div class="footer-brand-col">
-1057:             <a href="#inicio" class="footer-logo-link" aria-label="Storm Automotive - Voltar ao início">
-1058:               <img 
-1059:                 src={asset(site.assets.logo)} 
-1060:                 alt="Storm Automotive" 
-1061:                 class="footer-logo" 
-1062:                 width="160" 
-1063:                 height="35"
-1064:                 loading="lazy"
-1065:               />
-1066:             </a>
-1067:             <p class="footer-tagline">
-1068:               Mais que mecânica, confiança em movimento.
-1069:             </p>
-1070:           </div>
-1071: 
-1072:           <!-- Coluna 2: Navegação -->
-1073:           <div class="footer-nav-col">
-1074:             <h3 class="footer-col-title">NAVEGAÇÃO</h3>
-1075:             <ul class="footer-nav-list">
-1076:               <li><a href="#inicio" class="footer-nav-link">Início</a></li>
-1077:               <li><a href="#servicos" class="footer-nav-link">Serviços</a></li>
-1078:               <li><a href="#sobre" class="footer-nav-link">Sobre</a></li>
-1079:               <li><a href="#estrutura" class="footer-nav-link">Nossa Estrutura</a></li>
-1080:               <li><a href="#contato" class="footer-nav-link">Contato</a></li>
-1081:             </ul>
-1082:           </div>
-1083: 
-1084:           <!-- Coluna 3: Contato -->
-1085:           <div class="footer-contact-col">
-1086:             <h3 class="footer-col-title">CONTATO</h3>
-1087:             <ul class="footer-contact-list">
-1088:               <li class="footer-contact-item">
-1089:                 <span class="footer-contact-icon" aria-hidden="true">
-1090:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-1091:                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-1092:                     <circle cx="12" cy="10" r="3"></circle>
-1093:                   </svg>
-1094:                 </span>
-1095:                 <span class="footer-contact-text">{site.locationDisplay}</span>
-1096:               </li>
-1097:               <li class="footer-contact-item">
-1098:                 <span class="footer-contact-icon" aria-hidden="true">
-1099:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-1100:                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-1101:                   </svg>
-1102:                 </span>
-1103:                 <a href={`tel:+${site.phoneRaw}`} class="footer-contact-link">{site.phoneDisplay}</a>
-1104:               </li>
-1105:               <li class="footer-contact-item">
-1106:                 <span class="footer-contact-icon" aria-hidden="true">
-1107:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-1108:                     <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-1109:                     <path d="M22 6l-10 7L2 6"></path>
-1110:                   </svg>
-1111:                 </span>
-1112:                 <a href={`mailto:${site.email}`} class="footer-contact-link">{site.email}</a>
-1113:               </li>
-1114:               <li class="footer-contact-item">
-1115:                 <span class="footer-contact-icon" aria-hidden="true">
-1116:                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-1117:                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-1118:                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-1119:                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-1120:                   </svg>
-1121:                 </span>
-1122:                 <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-contact-link">{site.instagramHandle}</a>
-1123:               </li>
-1124:             </ul>
-1125:           </div>
-1126: 
-1127:           <!-- Coluna 4: Redes Sociais -->
-1128:           <div class="footer-social-col">
-1129:             <h3 class="footer-col-title">SIGA A STORM</h3>
-1130:             <div class="footer-social-list">
-1131:               <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Storm Automotive no Instagram">
-1132:                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-1133:                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-1134:                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-1135:                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-1136:                 </svg>
-1137:               </a>
-1138: 
-1139:               <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Storm Automotive no Facebook">
-1140:                 <svg viewBox="0 0 24 24" fill="currentColor">
-1141:                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-1142:                 </svg>
-1143:               </a>
-1144:             </div>
-1145:           </div>
-1146:         </div>
-1147: 
-1148:         <!-- Barra Final -->
-1149:         <div class="footer-bottom-bar">
-1150:           <div class="footer-copyright">
-1151:             <span>&copy; {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
-1152:           </div>
-1153:           <div class="footer-legal-links">
-1154:             <a href="#privacidade" class="footer-legal-link">Política de Privacidade</a>
-1155:             <span class="footer-legal-separator" aria-hidden="true">&bull;</span>
-1156:             <a href="#termos" class="footer-legal-link">Termos de Uso</a>
-1157:           </div>
-1158:         </div>
-1159:       </div>
-1160:     </footer>
-1161:   </div>
-1162: </BaseLayout>
+                </svg>
+                <span>AGENDAR PELO WHATSAPP</span>
+                <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Coluna 2: Informações de Localização e Horários -->
+            <div class="contact-info-col" data-reveal data-reveal-delay="150">
+              <!-- Endereço / Localização -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon-circle" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div class="contact-info-text">
+                  <span class="contact-info-label">Localização</span>
+                  <span class="contact-info-value">{site.city} – {site.state}</span>
+                  <span class="contact-info-sub">{site.address.split(',')[0]}</span>
+                  <a href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="contact-map-link mobile-only">Como chegar &rarr;</a>
+                </div>
+              </div>
+
+              <!-- Telefone Direto -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon-circle" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div class="contact-info-text">
+                  <span class="contact-info-label">Telefone Direto</span>
+                  <a href={`tel:+${site.phoneRaw}`} class="contact-info-value">{site.phoneDisplay}</a>
+                  <span class="contact-info-sub">Atendimento comercial e orçamentos</span>
+                </div>
+              </div>
+
+              <!-- Horário de Atendimento -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon-circle" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="contact-info-text">
+                  <span class="contact-info-label">Horário de Atendimento</span>
+                  <span class="contact-info-value">Segunda a Sexta: 8h às 12h e 13h30 às 18h</span>
+                  <span class="contact-info-sub">Sábado: 8h às 12h</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna 3: Card com Mapa Google Real (Desktop) -->
+            <div class="contact-map-col desktop-only" data-reveal data-reveal-delay="250">
+              <div class="contact-map-card">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.9481966097933!2d-53.92477948730591!3d-28.390632575696802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fc2d6871a24d35%3A0x3183f95ef3207d01!2sStorm%20Automotive!5e0!3m2!1spt-BR!2sbr!4v1789077887473!5m2!1spt-BR!2sbr" 
+                  class="contact-map-iframe"
+                  width="600" 
+                  height="450" 
+                  style="border:0;" 
+                  allowfullscreen={true} 
+                  loading="lazy" 
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  title="Localização da Storm Automotive no Google Maps"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====================================================================
+         RODAPÉ GLOBAL
+         ==================================================================== -->
+    <footer class="site-footer" id="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Coluna 1: Logo & Tagline Oficial -->
+          <div class="footer-brand-col">
+            <a href="#inicio" class="footer-logo-link" aria-label="Storm Automotive - Voltar ao início">
+              <img 
+                src={asset(site.assets.logo)} 
+                alt="Storm Automotive" 
+                class="footer-logo" 
+                width="160" 
+                height="35"
+                loading="lazy"
+              />
+            </a>
+            <p class="footer-tagline">
+              Mais que mecânica, confiança em movimento.
+            </p>
+          </div>
+
+          <!-- Coluna 2: Navegação -->
+          <div class="footer-nav-col">
+            <h3 class="footer-col-title">NAVEGAÇÃO</h3>
+            <ul class="footer-nav-list">
+              <li><a href="#inicio" class="footer-nav-link">Início</a></li>
+              <li><a href="#servicos" class="footer-nav-link">Serviços</a></li>
+              <li><a href="#sobre" class="footer-nav-link">Sobre</a></li>
+              <li><a href="#estrutura" class="footer-nav-link">Nossa Estrutura</a></li>
+              <li><a href="#contato" class="footer-nav-link">Contato</a></li>
+            </ul>
+          </div>
+
+          <!-- Coluna 3: Contato -->
+          <div class="footer-contact-col">
+            <h3 class="footer-col-title">CONTATO</h3>
+            <ul class="footer-contact-list">
+              <li class="footer-contact-item">
+                <span class="footer-contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                <span class="footer-contact-text">{site.locationDisplay}</span>
+              </li>
+              <li class="footer-contact-item">
+                <span class="footer-contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </span>
+                <a href={`tel:+${site.phoneRaw}`} class="footer-contact-link">{site.phoneDisplay}</a>
+              </li>
+              <li class="footer-contact-item">
+                <span class="footer-contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="M22 6l-10 7L2 6"></path>
+                  </svg>
+                </span>
+                <a href={`mailto:${site.email}`} class="footer-contact-link">{site.email}</a>
+              </li>
+              <li class="footer-contact-item">
+                <span class="footer-contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </span>
+                <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-contact-link">{site.instagramHandle}</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Coluna 4: Redes Sociais -->
+          <div class="footer-social-col">
+            <h3 class="footer-col-title">SIGA A STORM</h3>
+            <div class="footer-social-list">
+              <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Storm Automotive no Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+
+              <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Storm Automotive no Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra Final -->
+        <div class="footer-bottom-bar">
+          <div class="footer-copyright">
+            <span>&copy; {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
+          </div>
+          <div class="footer-legal-links">
+            <a href="#privacidade" class="footer-legal-link">Política de Privacidade</a>
+            <span class="footer-legal-separator" aria-hidden="true">&bull;</span>
+            <a href="#termos" class="footer-legal-link">Termos de Uso</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
