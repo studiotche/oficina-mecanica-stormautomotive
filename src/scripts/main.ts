@@ -4,10 +4,12 @@ export function initializeSite(): void {
   // Mobile Menu Drawer
   const hamburger = document.getElementById('hamburgerBtn') as HTMLButtonElement | null;
   const menu = document.getElementById('mobileMenu') as HTMLElement | null;
+  const backdrop = document.getElementById('mobile-backdrop') as HTMLElement | null;
 
   if (hamburger && menu) {
     const closeMenu = (): void => {
-      menu.classList.remove('open');
+      menu.classList.remove('is-open');
+      if (backdrop) backdrop.classList.remove('is-visible');
       menu.setAttribute('aria-hidden', 'true');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('menu-open');
@@ -15,14 +17,15 @@ export function initializeSite(): void {
     };
 
     const openMenu = (): void => {
-      menu.classList.add('open');
+      menu.classList.add('is-open');
+      if (backdrop) backdrop.classList.add('is-visible');
       menu.setAttribute('aria-hidden', 'false');
       hamburger.setAttribute('aria-expanded', 'true');
       document.body.classList.add('menu-open');
     };
 
     hamburger.addEventListener('click', () => {
-      if (menu.classList.contains('open')) {
+      if (menu.classList.contains('is-open')) {
         closeMenu();
       } else {
         openMenu();
@@ -32,6 +35,10 @@ export function initializeSite(): void {
     menu.querySelectorAll<HTMLElement>('[data-close-menu]').forEach((el) => {
       el.addEventListener('click', closeMenu);
     });
+
+    if (backdrop) {
+      backdrop.addEventListener('click', closeMenu);
+    }
 
     menu.querySelectorAll<HTMLAnchorElement>('.mobile-nav a').forEach((link) => {
       link.addEventListener('click', closeMenu);

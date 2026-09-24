@@ -702,6 +702,11 @@ section[id] {
   color: var(--color-accent);
 }
 
+.mobile-toggle svg,
+.mobile-drawer-close svg {
+  pointer-events: none;
+}
+
 @media (min-width: 992px) {
   .mobile-toggle {
     display: none;
@@ -2789,7 +2794,7 @@ section[id] {
 .faq-section {
   position: relative;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: var(--color-text-primary);
   padding-top: clamp(64px, 8vw, 112px);
   padding-bottom: clamp(64px, 8vw, 112px);
 }
