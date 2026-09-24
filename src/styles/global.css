@@ -2717,6 +2717,20 @@ section[id] {
   gap: 32px;
 }
 
+/* Ordem explícita: o cabeçalho reutiliza .structure-eyebrow/.structure-title,
+   que trazem order da seção estrutura — sem isso o botão ia para o topo */
+.testimonials-header .structure-eyebrow {
+  order: 0;
+}
+
+.testimonials-header .structure-title {
+  order: 1;
+}
+
+.testimonials-header .google-rating {
+  order: 2;
+}
+
 .testimonials-header-left {
   display: flex;
   flex-direction: column;
