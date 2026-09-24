@@ -79,10 +79,10 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
     </header>
 
     <!-- Drawer Mobile Acessível -->
-    <div class="mobile-drawer" id="mobile-drawer" aria-label="Menu móvel">
+    <div class="mobile-drawer" id="mobileMenu" aria-label="Menu móvel">
       <div class="mobile-drawer-header">
         <img src={asset(site.assets.logo)} alt="Storm Automotive" class="header-logo" width="147" height="32" />
-        <button class="mobile-drawer-close" id="mobile-menu-close" type="button" aria-label="Fechar menu">
+        <button class="mobile-drawer-close" id="mobile-menu-close" type="button" aria-label="Fechar menu" data-close-menu>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -92,11 +92,11 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
 
       <nav class="mobile-drawer-nav">
         <ul class="mobile-nav-list mobile-nav">
-          <li><a href="#servicos" class="mobile-nav-link">Serviços</a></li>
-          <li><a href="#estrutura" class="mobile-nav-link">Nossa estrutura</a></li>
-          <li><a href="#sobre" class="mobile-nav-link">Sobre</a></li>
-          <li><a href="#depoimento" class="mobile-nav-link">Depoimentos</a></li>
-          <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
+          <li><a href="#servicos" class="mobile-nav-link" data-close-menu>Serviços</a></li>
+          <li><a href="#estrutura" class="mobile-nav-link" data-close-menu>Nossa estrutura</a></li>
+          <li><a href="#sobre" class="mobile-nav-link" data-close-menu>Sobre</a></li>
+          <li><a href="#depoimento" class="mobile-nav-link" data-close-menu>Depoimentos</a></li>
+          <li><a href="#contato" class="mobile-nav-link" data-close-menu>Contato</a></li>
         </ul>
       </nav>
 
