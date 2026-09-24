@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   /* ==========================================================================
      STORM AUTOMOTIVE - DESIGN TOKENS
      Paleta: Preto Profundo / Grafite, Off-White e Laranja Storm
@@ -3370,3 +3370,4 @@ a.contact-info-value:hover {
        url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.ttf') format('truetype'),
        url('/oficina-mecanica-stormautomotive/assets/fonts/manrope-700.svg#Manrope') format('svg');
 }
+

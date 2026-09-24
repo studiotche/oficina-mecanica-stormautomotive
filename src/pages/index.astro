@@ -897,7 +897,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             </div>
 
             <!-- Coluna 2: Informações de Localização e Horários -->
-            <div class="contact-info-col" data-reveal data-reveal-delay="150">
+            <div class="contact-info-col">
               <!-- Endereço / Localização -->
               <div class="contact-info-item">
                 <div class="contact-info-icon-circle" aria-hidden="true">
@@ -945,7 +945,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             </div>
 
             <!-- Coluna 3: Card com Mapa Google Real (Desktop) -->
-            <div class="contact-map-col desktop-only" data-reveal data-reveal-delay="250">
+            <div class="contact-map-col desktop-only">
               <div class="contact-map-card">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.9481966097933!2d-53.92477948730591!3d-28.390632575696802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fc2d6871a24d35%3A0x3183f95ef3207d01!2sStorm%20Automotive!5e0!3m2!1spt-BR!2sbr!4v1789077887473!5m2!1spt-BR!2sbr" 
@@ -1074,6 +1074,10 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             <span class="footer-legal-separator" aria-hidden="true">&bull;</span>
             <a href="#termos" class="footer-legal-link">Termos de Uso</a>
           </div>
+        </div>
+        
+        <div class="footer-developer" style="text-align: center; margin-top: 32px; font-size: 0.8rem; color: #6C757D;">
+          Desenvolvido por <a href="https://jeankist.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); text-decoration: none; font-weight: 600;">Jean Kist</a> &copy; {new Date().getFullYear()}
         </div>
       </div>
     </footer>
