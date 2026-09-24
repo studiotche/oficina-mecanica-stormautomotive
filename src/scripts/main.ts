@@ -61,32 +61,44 @@ export function initializeSite(): void {
     const heroTagline = heroContent.querySelector<HTMLElement>('.hero-tagline');
     const heroLead = heroContent.querySelector<HTMLElement>('.lead');
     const heroActions = heroContent.querySelector<HTMLElement>('.hero-actions');
-    const heroCaption = heroContent.querySelector<HTMLElement>('.hero-caption');
+    const heroTrustStrip = heroContent.querySelector<HTMLElement>('.hero-trust-strip');
 
     const splitHeroWords = (element: HTMLElement | null): HTMLElement[] => {
       if (!element) return [];
-      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-      const textNodes: Text[] = [];
-      while (walker.nextNode()) textNodes.push(walker.currentNode as Text);
-      const words = textNodes.flatMap((node) => {
-        const isHighlight = node.parentElement?.closest('.highlight') !== null;
-        return (node.textContent || '')
-          .trim()
-          .split(/\s+/)
-          .filter(Boolean)
-          .map((text) => ({ text, isHighlight }));
-      });
-      element.replaceChildren();
-      return words.map(({ text, isHighlight }) => {
-        const word = document.createElement('span');
-        word.className = `hero-reveal-word${isHighlight ? ' highlight' : ''}`;
-        word.textContent = text;
-        element.append(word, ' ');
-        return word;
-      });
+      const newChildren: Node[] = [];
+      const wordSpans: HTMLElement[] = [];
+      
+      const processNode = (node: Node, isHighlightContext: boolean) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const textContent = (node.textContent || '').trim();
+          if (!textContent) return;
+          const words = textContent.split(/\s+/).filter(Boolean);
+          words.forEach((text) => {
+            const word = document.createElement('span');
+            word.className = `hero-reveal-word${isHighlightContext ? ' text-accent' : ''}`;
+            word.textContent = text;
+            newChildren.push(word);
+            wordSpans.push(word);
+            newChildren.push(document.createTextNode(' '));
+          });
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement;
+          if (el.tagName === 'BR') {
+            newChildren.push(el.cloneNode());
+          } else {
+            const isHighlight = isHighlightContext || el.classList.contains('text-accent');
+            Array.from(el.childNodes).forEach(child => processNode(child, isHighlight));
+          }
+        }
+      };
+
+      Array.from(element.childNodes).forEach(child => processNode(child, false));
+      element.replaceChildren(...newChildren);
+      return wordSpans;
     };
 
     const scheduleHeroWords = (words: HTMLElement[], startDelay: number): number => {
+      if (words.length === 0) return 0;
       let line = 0;
       let wordInLine = 0;
       let previousTop: number | null = null;
@@ -108,22 +120,30 @@ export function initializeSite(): void {
       const taglineWords = splitHeroWords(heroTagline);
       const leadWords = splitHeroWords(heroLead);
       heroContent.classList.add('hero-reveal-ready');
+      
       const eyebrowDelay = 0.05;
-      const titleDelay = 0.12;
-      const titleLines = scheduleHeroWords(titleWords, titleDelay);
-      const taglineDelay = titleDelay + titleLines * 0.07 + 0.24;
-      const taglineLines = scheduleHeroWords(taglineWords, taglineDelay);
-      const leadDelay = taglineDelay + taglineLines * 0.07 + 0.24;
-      const leadLines = scheduleHeroWords(leadWords, leadDelay);
-      const actionsDelay = leadDelay + leadLines * 0.07 + 0.24;
-      const captionDelay = actionsDelay + 0.3;
       if (heroEyebrow) heroEyebrow.style.setProperty('--hero-delay', `${eyebrowDelay}s`);
+
+      let currentDelay = 0.12;
+      
+      const titleLines = scheduleHeroWords(titleWords, currentDelay);
+      if (titleLines > 0) currentDelay += titleLines * 0.07 + 0.24;
+
+      const taglineLines = scheduleHeroWords(taglineWords, currentDelay);
+      if (taglineLines > 0) currentDelay += taglineLines * 0.07 + 0.24;
+
+      const leadLines = scheduleHeroWords(leadWords, currentDelay);
+      if (leadLines > 0) currentDelay += leadLines * 0.07 + 0.24;
+
+      const actionsDelay = currentDelay;
       if (heroActions) {
         heroActions.querySelectorAll<HTMLElement>(':scope > *').forEach((item, index) => {
           item.style.setProperty('--hero-delay', `${actionsDelay + index * 0.06}s`);
         });
+        currentDelay += 0.3; // Give button some time before trust strip
       }
-      if (heroCaption) heroCaption.style.setProperty('--hero-delay', `${captionDelay}s`);
+
+      if (heroTrustStrip) heroTrustStrip.style.setProperty('--hero-delay', `${currentDelay}s`);
     };
 
     if (document.fonts?.ready) {
@@ -312,6 +332,53 @@ export function initializeSite(): void {
   const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link, .mobile-nav-link');
 
   if (scrollSpySections.length > 0 && navLinks.length > 0) {
+    // Seções sem link no menu (ex.: #metodo, #faq) não devem apagar o indicador na passagem
+    const linkedIds = new Set<string>();
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) linkedIds.add(href.slice(1));
+    });
+
+    const setActiveLink = (id: string | null): void => {
+      navLinks.forEach(link => {
+        link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+      });
+    };
+
+    // Durante a rolagem programática (Lenis / smooth nativo) o observer é suspenso
+    // para o sublinhado não piscar nas seções intermediárias do trajeto.
+    let scrollSpySuspended = false;
+    let scrollSpyResumeTimeout = 0;
+
+    const resumeScrollSpy = (): void => {
+      window.clearTimeout(scrollSpyResumeTimeout);
+      scrollSpySuspended = false;
+    };
+
+    const suspendScrollSpy = (): void => {
+      scrollSpySuspended = true;
+      window.clearTimeout(scrollSpyResumeTimeout);
+      // Fallback absoluto: se nenhum scroll ocorrer (ex.: item já visível), retoma sozinho
+      scrollSpyResumeTimeout = window.setTimeout(resumeScrollSpy, 2500);
+    };
+
+    // Retoma o spy logo após a rolagem terminar (debounce do último evento de scroll)
+    window.addEventListener('scroll', () => {
+      if (!scrollSpySuspended) return;
+      window.clearTimeout(scrollSpyResumeTimeout);
+      scrollSpyResumeTimeout = window.setTimeout(resumeScrollSpy, 200);
+    }, { passive: true });
+
+    // Clique no menu: marca o item na hora e suspende o spy até a chegada
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#') || href.length < 2) return;
+        setActiveLink(href.slice(1));
+        suspendScrollSpy();
+      });
+    });
+
     const scrollSpyOptions = {
       root: null,
       rootMargin: '-40% 0px -60% 0px', // Ativa quando a seção cruza a linha de 40% do topo
@@ -319,15 +386,13 @@ export function initializeSite(): void {
     };
 
     const scrollSpyObserver = new IntersectionObserver((entries) => {
+      if (scrollSpySuspended) return;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.remove('is-active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('is-active');
-            }
-          });
+          if (id && linkedIds.has(id)) {
+            setActiveLink(id);
+          }
         }
       });
     }, scrollSpyOptions);
@@ -343,3 +408,4 @@ if (typeof document !== 'undefined') {
     initializeSite();
   }
 }
+

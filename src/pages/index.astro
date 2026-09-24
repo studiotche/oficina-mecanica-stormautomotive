@@ -128,14 +128,17 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
       <section class="hero-section" id="inicio" aria-label="Apresentação Storm Automotive">
         <!-- Fotografia Real HQ de Fundo com Sobreposição Editorial de Alto Contraste -->
         <div class="hero-backdrop">
-          <img 
-            src={asset(site.assets.hero)} 
-            alt="Oficina mecânica de alta precisão Storm Automotive com carros premium e infraestrutura de ponta" 
-            class="hero-bg-img"
-            width="1792"
-            height="877"
-            fetchpriority="high"
-          />
+          <picture>
+            <source media="(max-width: 768px)" srcset={asset(site.assets.heroMobile)} />
+            <img 
+              src={asset(site.assets.hero)} 
+              alt="Oficina mecânica de alta precisão Storm Automotive com carros premium e infraestrutura de ponta" 
+              class="hero-bg-img"
+              width="1792"
+              height="877"
+              fetchpriority="high"
+            />
+          </picture>
           <div class="hero-overlay" aria-hidden="true"></div>
         </div>
 
@@ -149,12 +152,14 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
 
             <!-- Título Principal de Alto Impacto -->
             <h1 class="hero-title">
-              SEU VEÍCULO<br />
-              EM <span class="text-accent highlight">BOAS MÃOS</span>
+              OFICINA MECÂNICA<br />
+              EM IVOTI,<br />
+              <span class="text-accent">STORM AUTOMOTIVE</span>
             </h1>
 
             <!-- Subtítulo -->
             <p class="hero-subtitle hero-tagline">
+              Seu veiculo em boas mãos.<br />
               Manutenção, tecnologia e confiança para você ir sempre mais longe.
             </p>
 
@@ -480,7 +485,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
             <div class="about-media-col">
               <div class="about-media-wrapper">
                 <img 
-                  src={asset("https://stormautomotive.vercel.app/assets/images/storm/equipe-storm-hq.png")} 
+                  src={asset("/assets/images/equipe-storm-hq.webp")} 
                   alt="Equipe de especialistas e proprietários da Storm Automotive em Ijuí–RS" 
                   class="about-img" 
                   width="1122" 
@@ -594,7 +599,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
         <!-- Fundo com Fotografia HQ e Sobreposição Editorial Escura -->
         <div class="method-backdrop" aria-hidden="true">
           <img 
-            src={asset("https://stormautomotive.vercel.app/assets/images/storm/metodo-storm-background-hq.png")} 
+            src={asset("/assets/images/metodo-storm-background-hq.webp")} 
             alt="" 
             class="method-bg-img" 
             width="1672" 
@@ -712,7 +717,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
               <div class="structure-gallery-row structure-gallery-row--top">
                 <div class="structure-item structure-item--panoramic">
                   <img 
-                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-oficina-panoramica-hq.png")} 
+                    src={asset("/assets/images/estrutura-oficina-panoramica-hq.webp")} 
                     alt="Visão panorâmica da oficina mecânica Storm Automotive com veículos e elevadores" 
                     class="structure-img" 
                     width="1672" 
@@ -724,7 +729,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
 
                 <div class="structure-item structure-item--elevador">
                   <img 
-                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-tecnico-elevador-hq.png")} 
+                    src={asset("/assets/images/estrutura-tecnico-elevador-hq.webp")} 
                     alt="Técnico especializado realizando inspeção veicular em elevador" 
                     class="structure-img" 
                     width="1672" 
@@ -739,7 +744,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
               <div class="structure-gallery-row structure-gallery-row--bottom">
                 <div class="structure-item structure-item--diagnostico">
                   <img 
-                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/servico-diagnostico-eletronico-hq.png")} 
+                    src={asset("/assets/images/servico-diagnostico-eletronico-hq.webp")} 
                     alt="Diagnóstico computadorizado de precisão em tablet automotivo" 
                     class="structure-img" 
                     width="1672" 
@@ -751,7 +756,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
 
                 <div class="structure-item structure-item--ferramental">
                   <img 
-                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-ferramental-hq.png")} 
+                    src={asset("/assets/images/estrutura-ferramental-hq.webp")} 
                     alt="Estações de ferramentas móveis e equipamentos técnicos Storm" 
                     class="structure-img" 
                     width="158" 
@@ -763,7 +768,7 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
 
                 <div class="structure-item structure-item--recepcao">
                   <img 
-                    src={asset("https://stormautomotive.vercel.app/assets/images/storm/estrutura-recepcao-hq.png")} 
+                    src={asset("/assets/images/estrutura-recepcao-hq.webp")} 
                     alt="Sala de recepção e espera premium Storm Automotive" 
                     class="structure-img" 
                     width="1672" 
@@ -1117,3 +1122,5 @@ const asset = (path: string) => path.startsWith('http') ? path : `${baseUrl}${pa
     </footer>
   </div>
 </BaseLayout>
+
+
