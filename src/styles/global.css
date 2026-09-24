@@ -142,11 +142,11 @@
     rgba(10, 12, 14, 0.12) 100%
   );
   --gradient-hero-mobile: linear-gradient(
-    180deg,
-    rgba(10, 12, 14, 0.88) 0%,
-    rgba(10, 12, 14, 0.72) 38%,
-    rgba(10, 12, 14, 0.40) 70%,
-    rgba(10, 12, 14, 0.85) 100%
+    to bottom,
+    transparent 0%,
+    rgba(10, 12, 14, 0.20) 40%,
+    rgba(10, 12, 14, 0.90) 80%,
+    rgba(10, 12, 14, 1) 100%
   );
   --gradient-card-overlay: linear-gradient(
     180deg,
@@ -903,7 +903,7 @@ section[id] {
   z-index: var(--z-elevated);
   display: flex;
   flex-direction: column;
-  padding-top: 45vh;
+  padding-top: 30vh;
   padding-bottom: 24px;
 }
 
